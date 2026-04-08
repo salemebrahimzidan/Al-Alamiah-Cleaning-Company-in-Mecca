@@ -1,0 +1,94 @@
+{
+  "pageTitle": "Al-Alamiya Cleaning — Mecca",
+  "nav": {
+    "ariaMain": "Main navigation",
+    "brandName": "Al-Alamiya Cleaning",
+    "logoAlt": "Al-Alamiya Cleaning — Mecca",
+    "brandTagline": "Mecca",
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "whyUs": "Why Us",
+    "contact": "Contact",
+    "whatsapp": "WhatsApp",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mobileNav": "Mobile navigation"
+  },
+  "language": {
+    "switchAriaToEn": "Switch to English",
+    "switchAriaToAr": "Switch to Arabic",
+    "labelEnglish": "English",
+    "labelArabic": "العربية"
+  },
+  "hero": {
+    "kicker": "Mecca · Trusted cleaning",
+    "headline": "Al-Alamiya Cleaning",
+    "tagline": "Professional home and office cleaning with steam cleaning and pest control.",
+    "highlightSteam": "Steam cleaning",
+    "highlightPest": "Pest control",
+    "highlightFast": "Fast & reliable",
+    "ctaBook": "Book now",
+    "ctaContact": "Contact us"
+  },
+  "about": {
+    "sectionTitle": "About us",
+    "missionTitle": "Our mission",
+    "missionBody": "Providing a clean and healthy environment for our clients using modern equipment and safe products.",
+    "visionTitle": "Our vision",
+    "visionBody": "To be the top choice for cleaning services in the region."
+  },
+  "services": {
+    "sectionTitle": "Our services",
+    "sectionLead": "Complete care for homes and workplaces — tailored plans and careful execution.",
+    "cards": {
+      "steam": {
+        "title": "Steam cleaning",
+        "desc": "Deep steam cleaning for homes and offices to remove dirt, grease, and allergens."
+      },
+      "pest": {
+        "title": "Pest control",
+        "desc": "Professional spraying and pest management to keep your space comfortable and safe."
+      },
+      "deep": {
+        "title": "Floors, carpets & upholstery",
+        "desc": "Thorough cleaning of floors, carpets, rugs, and furniture for a refreshed look."
+      },
+      "quick": {
+        "title": "Quick & reliable",
+        "desc": "Flexible scheduling and dependable teams that respect your time and property."
+      }
+    }
+  },
+  "whyUs": {
+    "sectionTitle": "Why choose us",
+    "sectionLead": "Quality you can see — service you can trust.",
+    "team": {
+      "title": "Professional team",
+      "desc": "Trained specialists who follow best practices on every job."
+    },
+    "eco": {
+      "title": "Eco-friendly products",
+      "desc": "Safe, effective cleaning materials that are gentle on people and the environment."
+    },
+    "punctual": {
+      "title": "On time, every time",
+      "desc": "We show up when promised and deliver consistent, high-quality results."
+    }
+  },
+  "contact": {
+    "sectionTitle": "Contact us",
+    "sectionLead": "Phone, email, or WhatsApp — we respond quickly.",
+    "addressTitle": "Location",
+    "addressBody": "Serving Mecca and nearby areas by arrangement.",
+    "mapTitle": "Map",
+    "phoneCard": "Phone",
+    "emailCard": "Email",
+    "whatsappCard": "WhatsApp",
+    "whatsappCtaLine": "Chat on WhatsApp"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "quickLinks": "Quick links"
+  }
+}
