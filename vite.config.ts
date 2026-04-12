@@ -9,3 +9,4 @@ export default defineConfig({
   plugins: [tailwindcss(), react()],
   base: '/Al-Alamiah-Cleaning-Company-in-Mecca/',
 })
+ // GitHub Pages project URL: https://<user>.github.io/Al-Alamiah-Cleaning-Company-in-Mecca/
