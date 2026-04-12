@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Set absolute sitemap URL in Google Search Console after you have a final domain, e.g.:
+# Sitemap: https://your-domain.com/sitemap.xml

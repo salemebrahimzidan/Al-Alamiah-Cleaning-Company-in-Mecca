@@ -1,15 +1,18 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
+import NavHashLink from './NavHashLink'
 import { useLanguage } from '../context/LanguageContext'
 import logoArabic from '../assets/logo-alamiah.png'
 import logoEnglish from '../assets/logo-english.png'
-import { WHATSAPP_HREF } from '../constants/contact'
+import { WHATSAPP_HREF_AR, WHATSAPP_HREF_EN } from '../constants/contact'
 
 const NAV_ITEMS = [
-  { key: 'nav.home', href: '#home' },
-  { key: 'nav.about', href: '#about' },
-  { key: 'nav.services', href: '#services' },
-  { key: 'nav.whyUs', href: '#why-us' },
-  { key: 'nav.contact', href: '#contact' },
+  { key: 'nav.home', to: '/#home' },
+  { key: 'nav.about', to: '/#about' },
+  { key: 'nav.services', to: '/#services' },
+  { key: 'nav.whyUs', to: '/#why-us' },
+  { key: 'faq.sectionTitle', to: '/#faq' },
+  { key: 'nav.contact', to: '/#contact' },
 ] as const
 
 const toolbarBtn =
@@ -37,11 +40,12 @@ export default function Navbar() {
   const closeMenu = useCallback(() => setMenuOpen(false), [])
 
   const navLinks = useMemo(
-    () => NAV_ITEMS.map((item) => ({ label: t(item.key), href: item.href })),
+    () => NAV_ITEMS.map((item) => ({ label: t(item.key), to: item.to })),
     [t],
   )
 
   const brandLogoSrc = locale === 'en' ? logoEnglish : logoArabic
+  const wa = locale === 'ar' ? WHATSAPP_HREF_AR : WHATSAPP_HREF_EN
 
   useEffect(() => {
     const onResize = () => {
@@ -66,8 +70,8 @@ export default function Navbar() {
         className="mx-auto flex w-full max-w-[1120px] flex-nowrap items-center gap-3 px-5 py-3.5 md:gap-4"
         aria-label={t('nav.ariaMain')}
       >
-        <a
-          href="#home"
+        <Link
+          to="/"
           className="flex min-w-0 shrink-0 items-center gap-2.5 rounded-[10px] py-1 pe-2 ps-1 text-start no-underline transition-opacity hover:opacity-90 sm:gap-3 sm:py-1.5 sm:ps-1.5"
           aria-label={`${t('nav.brandName')} — ${t('nav.brandTagline')}`}
           onClick={closeMenu}
@@ -88,14 +92,14 @@ export default function Navbar() {
               {t('nav.brandTagline')}
             </span>
           </span>
-        </a>
+        </Link>
 
         <ul className="hidden min-w-0 flex-1 flex-wrap items-center justify-center gap-1 md:flex">
-          {navLinks.map(({ label, href }) => (
-            <li key={href}>
-              <a href={href} className={navLinkClass}>
+          {navLinks.map(({ label, to }) => (
+            <li key={to}>
+              <NavHashLink to={to} className={navLinkClass}>
                 {label}
-              </a>
+              </NavHashLink>
             </li>
           ))}
         </ul>
@@ -119,7 +123,7 @@ export default function Navbar() {
           </button>
 
           <a
-            href={WHATSAPP_HREF}
+            href={wa}
             target="_blank"
             rel="noopener noreferrer"
             className={`${whatsappToolbarClass} hidden min-h-[44px] px-4 text-sm transition-transform sm:inline-flex md:text-[15px]`}
@@ -172,20 +176,20 @@ export default function Navbar() {
                 : t('language.labelArabic')}
             </button>
           </li>
-          {navLinks.map(({ label, href }) => (
-            <li key={href}>
-              <a
-                href={href}
+          {navLinks.map(({ label, to }) => (
+            <li key={to}>
+              <NavHashLink
+                to={to}
                 className={`${navLinkClass} block w-full px-3 py-3 text-base`}
                 onClick={closeMenu}
               >
                 {label}
-              </a>
+              </NavHashLink>
             </li>
           ))}
           <li className="pt-1">
             <a
-              href={WHATSAPP_HREF}
+              href={wa}
               target="_blank"
               rel="noopener noreferrer"
               className={`${whatsappToolbarClass} w-full justify-center py-3 text-base`}

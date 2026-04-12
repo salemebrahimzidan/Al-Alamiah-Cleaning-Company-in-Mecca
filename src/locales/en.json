@@ -1,5 +1,9 @@
 {
-  "pageTitle": "Al-Alamiya Cleaning — Mecca",
+  "pageTitle": "Cleaning Company in Mecca | Home, Villa & Office | Al-Alamiya Cleaning",
+  "seo": {
+    "metaDescription": "Mecca cleaning company for homes, villas, offices & deep cleaning near Al Haram. Fast scheduling, trained team & safe products. Book on WhatsApp.",
+    "ogLocale": "en_US"
+  },
   "nav": {
     "ariaMain": "Main navigation",
     "brandName": "Al-Alamiya Cleaning",
@@ -22,14 +26,33 @@
     "labelArabic": "العربية"
   },
   "hero": {
-    "kicker": "Mecca · Trusted cleaning",
-    "headline": "Al-Alamiya Cleaning",
-    "tagline": "Professional home and office cleaning with steam cleaning and pest control.",
+    "kicker": "Mecca · Trusted cleaning · WhatsApp booking",
+    "headline": "Home & office cleaning in Mecca (Makkah)",
+    "subheadBrand": "Al-Alamiya Cleaning",
+    "tagline": "Professional cleaning for homes, villas, and offices—deep cleaning, steam where suitable, and pest control. Book fast on WhatsApp.",
     "highlightSteam": "Steam cleaning",
     "highlightPest": "Pest control",
     "highlightFast": "Fast & reliable",
-    "ctaBook": "Book now",
+    "ctaBook": "WhatsApp — book now",
+    "ctaCall": "Call now",
     "ctaContact": "Contact us"
+  },
+  "trustStrip": {
+    "a": "Mecca experience",
+    "b": "Safe products",
+    "c": "On-time service",
+    "d": "Follow-up care"
+  },
+  "servicePages": {
+    "sectionTitle": "Services in Makkah (full pages)",
+    "sectionLead": "Local SEO pages—pick a service and message us on WhatsApp.",
+    "home": "Home cleaning",
+    "villa": "Villa cleaning",
+    "office": "Office cleaning",
+    "deep": "Deep cleaning",
+    "locAziziyah": "Al Aziziyah",
+    "locShawqiyah": "Al Shawqiyah",
+    "locHaram": "Near Al Haram"
   },
   "about": {
     "sectionTitle": "About us",
@@ -41,6 +64,8 @@
   "services": {
     "sectionTitle": "Our services",
     "sectionLead": "Complete care for homes and workplaces — tailored plans and careful execution.",
+    "cardLink": "Details & book",
+    "pestLink": "Contact — pest control",
     "cards": {
       "steam": {
         "title": "Steam cleaning",
@@ -89,6 +114,42 @@
   },
   "footer": {
     "rights": "All rights reserved.",
-    "quickLinks": "Quick links"
+    "quickLinks": "Quick links",
+    "servicesTitle": "Makkah services",
+    "locationsTitle": "Areas"
+  },
+  "faq": {
+    "sectionTitle": "FAQ",
+    "sectionLead": "Quick answers about cleaning services in Mecca.",
+    "items": [
+      {
+        "q": "Do you cover all of Mecca?",
+        "a": "Yes—we serve Makkah including districts near Al Haram, Al Aziziyah, Al Shawqiyah, and more by arrangement."
+      },
+      {
+        "q": "How long does an apartment or villa cleaning take?",
+        "a": "It depends on size and service type (standard vs deep). WhatsApp your rooms, kitchen, and property type for a quick estimate."
+      },
+      {
+        "q": "Are your products safe for kids and sensitivities?",
+        "a": "We use household-appropriate cleaning materials and can discuss gentler options on request."
+      },
+      {
+        "q": "Is there a guarantee or follow-up?",
+        "a": "We work to clear standards—if something needs attention after the visit, contact us and we’ll address it quickly."
+      },
+      {
+        "q": "Do you offer deep cleaning before move-in or after painting?",
+        "a": "Yes—kitchens, bathrooms, floors, and glass depending on the condition of the property."
+      },
+      {
+        "q": "How do I book?",
+        "a": "Fastest: WhatsApp your district, service type, and preferred date—or call us directly."
+      },
+      {
+        "q": "Do you offer contracts for offices?",
+        "a": "Yes—recurring visits for offices and retail spaces in Makkah based on your schedule."
+      }
+    ]
   }
 }

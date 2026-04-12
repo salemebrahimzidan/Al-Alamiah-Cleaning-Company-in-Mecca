@@ -80,7 +80,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement
     root.lang = locale
     root.dir = dir
-    document.title = getByPath(messages[locale], 'pageTitle')
   }, [locale, dir])
 
   const value = useMemo(
