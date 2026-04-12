@@ -126,7 +126,7 @@ function App() {
                 return (
                   <article key={key} className="service-card">
                     <div className="service-card__icon" aria-hidden>
-                      <Icon className="h-9 w-9 text-[#38bdf8]" />
+                      <Icon className="h-9 w-9" />
                     </div>
                     <h3 className="service-card__title">{t(`services.cards.${key}.title`)}</h3>
                     <p className="service-card__desc">{t(`services.cards.${key}.desc`)}</p>
@@ -149,7 +149,7 @@ function App() {
                 return (
                   <article key={key} className="feature-card">
                     <div className="feature-card__icon" aria-hidden>
-                      <Icon className="h-8 w-8 text-[#34d399]" />
+                      <Icon className="h-8 w-8" />
                     </div>
                     <h3 className="feature-card__title">{t(`whyUs.${key}.title`)}</h3>
                     <p className="feature-card__desc">{t(`whyUs.${key}.desc`)}</p>
@@ -249,6 +249,12 @@ function App() {
             </div>
           </div>
         </section>
+
+        <nav className="mobile-cta-bar md:hidden" aria-label={t('hero.ctaBook')}>
+          <a className="btn btn--primary" href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer">
+            {t('hero.ctaBook')}
+          </a>
+        </nav>
 
         <footer className="site-footer">
           <div className="container site-footer__inner">
