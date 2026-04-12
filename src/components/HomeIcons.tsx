@@ -114,19 +114,21 @@ export function IconZap({ className = 'h-10 w-10' }: IconProps) {
 export function IconTeam({ className = 'h-7 w-7' }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 48 48" fill="none" aria-hidden>
-      <circle cx="18" cy="16" r="5" stroke="currentColor" strokeWidth="2" />
+      <circle cx="18" cy="16" r="5" stroke="currentColor" strokeWidth="2.2" />
       <path
         d="M8 38c0-6 4.5-10 10-10s10 4 10 10"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="2.2"
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <circle cx="32" cy="18" r="4" stroke="currentColor" strokeWidth="2" />
+      <circle cx="32" cy="18" r="4" stroke="currentColor" strokeWidth="2.2" />
       <path
         d="M26 38c0-4 3-7 7-7"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="2.2"
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )
@@ -138,10 +140,17 @@ export function IconLeaf({ className = 'h-7 w-7' }: IconProps) {
       <path
         d="M8 36c12-2 22-12 24-24 8 2 12 10 10 18-6 4-14 6-22 6-4 0-8-.5-12-1.5z"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="2.2"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14 30c6-4 12-10 16-16"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path d="M14 30c6-4 12-10 16-16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   )
 }
@@ -161,8 +170,14 @@ export function IconSparkle({ className = 'h-7 w-7' }: IconProps) {
 export function IconClock({ className = 'h-7 w-7' }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 48 48" fill="none" aria-hidden>
-      <circle cx="24" cy="24" r="14" stroke="currentColor" strokeWidth="2" />
-      <path d="M24 16v10l6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="24" cy="24" r="14" stroke="currentColor" strokeWidth="2.2" />
+      <path
+        d="M24 16v10l6 4"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   )
 }

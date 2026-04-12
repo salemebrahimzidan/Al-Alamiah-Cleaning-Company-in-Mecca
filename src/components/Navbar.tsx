@@ -13,20 +13,22 @@ const NAV_ITEMS = [
 ] as const
 
 const toolbarBtn =
-  'inline-flex shrink-0 items-center justify-center rounded-xl border font-bold transition-[background,border-color,box-shadow,transform] duration-200 ' +
-  'border-[color-mix(in_oklab,var(--border)_85%,var(--text-strong))] ' +
-  'bg-[color-mix(in_oklab,var(--surface)_88%,var(--bg))] ' +
-  'text-(--text-strong) shadow-[0_1px_0_color-mix(in_oklab,var(--text-strong)_5%,transparent),0_8px_20px_oklab(0%_none_none/0.22)] ' +
-  'hover:border-[color-mix(in_oklab,var(--accent)_42%,var(--border))] ' +
-  'hover:bg-[color-mix(in_oklab,var(--surface)_94%,var(--accent))] ' +
-  'hover:shadow-[0_1px_0_color-mix(in_oklab,var(--accent)_12%,transparent),0_10px_26px_color-mix(in_oklab,var(--accent)_12%,transparent)] ' +
+  'inline-flex shrink-0 items-center justify-center rounded-xl border font-bold transition-[background,border-color,box-shadow,transform] duration-200 ease-out ' +
+  'border-[#e5e7eb] bg-white text-[#111827] shadow-[0_1px_2px_rgba(0,0,0,0.04)] ' +
+  'hover:border-[#d1d5db] hover:bg-[#f9fafb] hover:shadow-[0_10px_25px_rgba(0,0,0,0.05)] ' +
   'active:translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ' +
-  'focus-visible:outline-[color-mix(in_oklab,var(--accent)_65%,transparent)]'
+  'focus-visible:outline-[#0ea5e9]'
+
+const whatsappToolbarClass =
+  `${toolbarBtn} !border-transparent !text-white ` +
+  '!bg-[linear-gradient(135deg,#22c55e,#10b981)] !shadow-[0_4px_14px_rgba(16,185,129,0.28)] ' +
+  'hover:!border-transparent hover:!bg-[linear-gradient(135deg,#34d399,#10b981)] hover:!shadow-[0_8px_22px_rgba(16,185,129,0.32)] ' +
+  'hover:!scale-[1.02]'
 
 const navLinkClass =
-  'rounded-[10px] border border-transparent px-2.5 py-2 text-sm font-medium text-(--text) ' +
-  'transition-[background,border-color,color] duration-200 ' +
-  'hover:border-(--border) hover:bg-(--surface) hover:text-(--text-strong) lg:text-[15px]'
+  'rounded-[10px] border border-transparent px-2.5 py-2 text-sm font-medium text-[#6b7280] ' +
+  'transition-[background,border-color,color] duration-200 ease-out ' +
+  'hover:border-[#e5e7eb] hover:bg-[#f9fafb] hover:text-[#111827] lg:text-[15px]'
 
 export default function Navbar() {
   const { t, locale, toggleLocale } = useLanguage()
@@ -70,7 +72,7 @@ export default function Navbar() {
           aria-label={`${t('nav.brandName')} — ${t('nav.brandTagline')}`}
           onClick={closeMenu}
         >
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-1 shadow-[0_2px_12px_oklab(0%_none_none/0.25)] ring-1 ring-white/20 sm:h-14 sm:w-14 sm:p-1.5">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-1 shadow-[0_4px_14px_rgba(0,0,0,0.06)] ring-1 ring-[#f3f4f6] sm:h-14 sm:w-14 sm:p-1.5">
             <img
               src={brandLogoSrc}
               alt={t('nav.logoAlt')}
@@ -82,7 +84,7 @@ export default function Navbar() {
             />
           </span>
           <span className="hidden min-w-0 flex-col leading-tight sm:flex">
-            <span className="text-xs font-semibold text-(--muted) md:text-[13px]">
+            <span className="text-xs font-semibold text-[#9ca3af] md:text-[13px]">
               {t('nav.brandTagline')}
             </span>
           </span>
@@ -120,12 +122,7 @@ export default function Navbar() {
             href={WHATSAPP_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${toolbarBtn} hidden min-h-[42px] px-4 text-sm sm:inline-flex md:text-[15px]`}
-            style={{
-              background:
-                'linear-gradient(135deg, color-mix(in oklab, var(--accent) 75%, var(--surface)), color-mix(in oklab, var(--accent-2) 60%, var(--surface)))',
-              borderColor: 'color-mix(in oklab, var(--accent) 38%, var(--border))',
-            }}
+            className={`${whatsappToolbarClass} hidden min-h-[44px] px-4 text-sm transition-transform sm:inline-flex md:text-[15px]`}
           >
             {t('nav.whatsapp')}
           </a>
@@ -140,13 +137,13 @@ export default function Navbar() {
           >
             <span className="flex w-[22px] flex-col gap-1.5">
               <span
-                className={`block h-0.5 rounded-sm bg-(--text-strong) transition-transform ${menuOpen ? 'translate-y-2 rotate-45' : ''}`}
+                className={`block h-0.5 rounded-sm bg-[#111827] transition-transform ${menuOpen ? 'translate-y-2 rotate-45' : ''}`}
               />
               <span
-                className={`block h-0.5 rounded-sm bg-(--text-strong) transition-opacity ${menuOpen ? 'opacity-0' : ''}`}
+                className={`block h-0.5 rounded-sm bg-[#111827] transition-opacity ${menuOpen ? 'opacity-0' : ''}`}
               />
               <span
-                className={`block h-0.5 rounded-sm bg-(--text-strong) transition-transform ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`}
+                className={`block h-0.5 rounded-sm bg-[#111827] transition-transform ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`}
               />
             </span>
           </button>
@@ -158,7 +155,7 @@ export default function Navbar() {
         role="region"
         aria-label={t('nav.mobileNav')}
         aria-hidden={!menuOpen}
-        className={`border-t border-(--border) bg-[color-mix(in_oklab,var(--bg)_92%,transparent)] backdrop-blur-md md:hidden ${menuOpen ? 'max-h-128 opacity-100' : 'pointer-events-none max-h-0 overflow-hidden opacity-0'} transition-all duration-300 ease-out`}
+        className={`border-t border-[#e5e7eb] bg-white/95 backdrop-blur-md md:hidden ${menuOpen ? 'max-h-128 opacity-100' : 'pointer-events-none max-h-0 overflow-hidden opacity-0'} transition-all duration-300 ease-out`}
       >
         <ul className="flex flex-col gap-1 px-4 py-4">
           <li>
@@ -191,12 +188,7 @@ export default function Navbar() {
               href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${toolbarBtn} w-full justify-center py-3 text-base`}
-              style={{
-                background:
-                  'linear-gradient(135deg, color-mix(in oklab, var(--accent) 75%, var(--surface)), color-mix(in oklab, var(--accent-2) 60%, var(--surface)))',
-                borderColor: 'color-mix(in oklab, var(--accent) 38%, var(--border))',
-              }}
+              className={`${whatsappToolbarClass} w-full justify-center py-3 text-base`}
               onClick={closeMenu}
             >
               {t('nav.whatsapp')}
