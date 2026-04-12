@@ -7,5 +7,5 @@ import { defineConfig } from 'vite'
 // Relative base keeps JS/CSS URLs correct on GitHub Pages for any repo folder name.
 export default defineConfig({
   plugins: [tailwindcss(), react()],
-  base: './',
+  base: '/Al-Alamiah-Cleaning-Company-in-Mecca/',
 })
