@@ -77,6 +77,7 @@ export default function HomePage() {
   const phoneDisplay = formatPhoneDisplay(COMPANY_PHONE_DIGITS)
   const wa = locale === 'ar' ? WHATSAPP_HREF_AR : WHATSAPP_HREF_EN
   const canonical = absoluteAppUrl()
+  const ogImage = absoluteAppUrl('og-image.webp')
   const faqItems = messages[locale].faq.items
 
   return (
@@ -90,9 +91,11 @@ export default function HomePage() {
         <meta property="og:description" content={t('seo.metaDescription')} />
         {canonical ? <meta property="og:url" content={canonical} /> : null}
         <meta property="og:locale" content={t('seo.ogLocale')} />
+        {ogImage ? <meta property="og:image" content={ogImage} /> : null}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={t('pageTitle')} />
         <meta name="twitter:description" content={t('seo.metaDescription')} />
+        {ogImage ? <meta name="twitter:image" content={ogImage} /> : null}
       </Helmet>
       <SeoJsonLd />
 

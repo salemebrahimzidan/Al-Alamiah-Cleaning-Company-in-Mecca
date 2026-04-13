@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import NavHashLink from './NavHashLink'
 import { useLanguage } from '../context/LanguageContext'
@@ -15,7 +16,7 @@ const LOCATION_PATHS = [
   { to: '/locations/near-al-haram-makkah', key: 'servicePages.locHaram' as const },
 ]
 
-export default function SiteFooter() {
+function SiteFooter() {
   const { t } = useLanguage()
 
   return (
@@ -60,3 +61,5 @@ export default function SiteFooter() {
     </footer>
   )
 }
+
+export default memo(SiteFooter)
