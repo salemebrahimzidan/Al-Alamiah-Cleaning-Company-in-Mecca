@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import {
@@ -24,11 +25,13 @@ import {
   WHATSAPP_HREF_AR,
   WHATSAPP_HREF_EN,
 } from '../constants/contact'
-import { absoluteAppUrl } from '../constants/site'
+import { absoluteAppUrl, getSiteOrigin } from '../constants/site'
 import { useLanguage } from '../context/LanguageContext'
 import ar from '../locales/ar.json'
 import en from '../locales/en.json'
 import '../App.css'
+
+const OpenStreetMapEmbed = lazy(() => import('../components/OpenStreetMapEmbed'))
 
 const SERVICE_KEYS = ['steam', 'pest', 'deep', 'quick'] as const
 const WHY_KEYS = ['team', 'eco', 'punctual'] as const
@@ -76,6 +79,10 @@ export default function HomePage() {
   const canonical = absoluteAppUrl()
   const ogImage = absoluteAppUrl('og-image.webp')
   const faqItems = messages[locale].faq.items
+  const siteOrigin = getSiteOrigin()
+  const heroAvif = `${import.meta.env.BASE_URL}hero-lcp.avif`
+  const heroWebp = `${import.meta.env.BASE_URL}hero-lcp.webp`
+  const lcpPreloadHref = siteOrigin ? absoluteAppUrl('hero-lcp.avif') : ''
 
   return (
     <>
@@ -83,12 +90,19 @@ export default function HomePage() {
         <title>{t('pageTitle')}</title>
         <meta name="description" content={t('seo.metaDescription')} />
         {canonical ? <link rel="canonical" href={canonical} /> : null}
+        {lcpPreloadHref ? (
+          <link rel="preload" href={lcpPreloadHref} as="image" type="image/avif" />
+        ) : null}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={t('pageTitle')} />
         <meta property="og:description" content={t('seo.metaDescription')} />
         {canonical ? <meta property="og:url" content={canonical} /> : null}
         <meta property="og:locale" content={t('seo.ogLocale')} />
         {ogImage ? <meta property="og:image" content={ogImage} /> : null}
+        {ogImage ? <meta property="og:image:width" content="1200" /> : null}
+        {ogImage ? <meta property="og:image:height" content="630" /> : null}
+        {ogImage ? <meta property="og:image:type" content="image/webp" /> : null}
+        {ogImage ? <meta property="og:image:alt" content={t('seo.ogImageAlt')} /> : null}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={t('pageTitle')} />
         <meta name="twitter:description" content={t('seo.metaDescription')} />
@@ -107,6 +121,19 @@ export default function HomePage() {
       <main className="site-main">
         <section id="home" className="page-hero scroll-mt-20" aria-labelledby="hero-heading">
           <div className="page-hero__bg" aria-hidden />
+          <div className="page-hero__lcp" aria-hidden>
+            <picture>
+              <source srcSet={heroAvif} type="image/avif" />
+              <img
+                src={heroWebp}
+                alt=""
+                width={1600}
+                height={900}
+                decoding="async"
+                fetchPriority="high"
+              />
+            </picture>
+          </div>
           <div className="container page-hero__content">
             <p className="page-hero__kicker">{t('hero.kicker')}</p>
             <h1 id="hero-heading" className="page-hero__headline">
@@ -115,7 +142,7 @@ export default function HomePage() {
             <p className="page-hero__subbrand">{t('hero.subheadBrand')}</p>
             <p className="page-hero__tagline">{t('hero.tagline')}</p>
 
-            <ul className="trust-strip" aria-label={t('trustStrip.a')}>
+            <ul className="trust-strip" aria-label={t('trustStrip.ariaListLabel')}>
               <li>{t('trustStrip.a')}</li>
               <li>{t('trustStrip.b')}</li>
               <li>{t('trustStrip.c')}</li>
@@ -153,10 +180,16 @@ export default function HomePage() {
             </div>
 
             <div className="page-hero__cta page-hero__cta--triple">
-              <a className="btn btn--primary" href={wa} target="_blank" rel="noopener noreferrer">
+              <a
+                className="btn btn--primary"
+                href={wa}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t('contact.ariaBookWhatsapp')}
+              >
                 {t('hero.ctaBook')}
               </a>
-              <a className="btn btn--call" href={PHONE_TEL_HREF}>
+              <a className="btn btn--call" href={PHONE_TEL_HREF} aria-label={t('contact.ariaPhone')}>
                 {t('hero.ctaCall')}
               </a>
               <a className="btn btn--secondary" href="#contact">
@@ -271,9 +304,14 @@ export default function HomePage() {
               })}
             </div>
 
-            <h2 className="section__title section__title--sub">{t('servicePages.sectionTitle')}</h2>
+            <h3 id="service-pages-heading" className="section__title section__title--sub">
+              {t('servicePages.sectionTitle')}
+            </h3>
             <p className="section__lead">{t('servicePages.sectionLead')}</p>
-            <nav className="service-hub" aria-label={t('servicePages.sectionTitle')}>
+            <nav
+              className="service-hub"
+              aria-labelledby="service-pages-heading"
+            >
               {SERVICE_HUB.map(({ to, key }) => (
                 <Link key={to} className="service-hub__link" to={to}>
                   {t(key)}
@@ -321,7 +359,13 @@ export default function HomePage() {
               ))}
             </div>
             <div className="faq-cta">
-              <a className="btn btn--primary" href={wa} target="_blank" rel="noopener noreferrer">
+              <a
+                className="btn btn--primary"
+                href={wa}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t('contact.ariaBookWhatsapp')}
+              >
                 {t('hero.ctaBook')}
               </a>
             </div>
@@ -337,7 +381,11 @@ export default function HomePage() {
 
             <div className="contact-layout">
               <div className="contact-cards">
-                <a className="contact-card" href={PHONE_TEL_HREF}>
+                <a
+                  className="contact-card"
+                  href={PHONE_TEL_HREF}
+                  aria-label={t('contact.ariaPhone')}
+                >
                   <span className="contact-card__row">
                     <span
                       className="contact-card__icon-wrap contact-card__icon-wrap--phone"
@@ -353,7 +401,11 @@ export default function HomePage() {
                     </span>
                   </span>
                 </a>
-                <a className="contact-card" href={`mailto:${COMPANY_EMAIL}`}>
+                <a
+                  className="contact-card"
+                  href={`mailto:${COMPANY_EMAIL}`}
+                  aria-label={t('contact.ariaEmail')}
+                >
                   <span className="contact-card__row">
                     <span
                       className="contact-card__icon-wrap contact-card__icon-wrap--mail"
@@ -374,6 +426,7 @@ export default function HomePage() {
                   href={wa}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={t('contact.ariaWhatsapp')}
                 >
                   <span className="contact-card__row">
                     <span
@@ -405,14 +458,19 @@ export default function HomePage() {
               </div>
 
               <div className="contact-aside">
-                <div className="map-embed" aria-label={t('contact.mapTitle')}>
-                  <iframe
-                    title={t('contact.mapTitle')}
-                    src="https://www.openstreetmap.org/export/embed.html?bbox=39.805%2C21.405%2C39.835%2C21.435&amp;layer=mapnik"
-                    className="map-embed__frame"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
+                <div className="map-embed" role="region" aria-label={t('contact.mapTitle')}>
+                  <Suspense
+                    fallback={
+                      <div
+                        className="map-embed__frame map-embed--pending"
+                        role="status"
+                        aria-live="polite"
+                        aria-label={t('contact.mapLoading')}
+                      />
+                    }
+                  >
+                    <OpenStreetMapEmbed />
+                  </Suspense>
                 </div>
               </div>
             </div>

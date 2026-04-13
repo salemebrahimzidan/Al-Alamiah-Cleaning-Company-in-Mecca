@@ -1,11 +1,18 @@
-/** Set in `.env` for canonical URLs in production, e.g. VITE_SITE_URL=https://example.com */
+/** Primary production host (canonical / OG when env is unset during prerender). */
+export const PRODUCTION_SITE_ORIGIN =
+  'https://al-alamiah-cleaning-company.vercel.app'
+
+/** Set `VITE_SITE_URL` in `.env` / hosting env for canonical URLs, e.g. https://example.com */
 export function getSiteOrigin(): string {
   const fromEnv = import.meta.env.VITE_SITE_URL as string | undefined
-  if (fromEnv && typeof fromEnv === 'string') {
+  if (fromEnv && typeof fromEnv === 'string' && fromEnv.trim()) {
     return fromEnv.replace(/\/$/, '')
   }
   if (typeof window !== 'undefined') {
     return window.location.origin
+  }
+  if (import.meta.env.PROD) {
+    return PRODUCTION_SITE_ORIGIN
   }
   return ''
 }

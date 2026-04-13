@@ -124,7 +124,13 @@ export default function SeoLandingPage({ area }: { area: Area }) {
           </div>
 
           <div className="seo-page__cta">
-            <a className="btn btn--primary" href={wa} target="_blank" rel="noopener noreferrer">
+            <a
+              className="btn btn--primary"
+              href={wa}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('contact.ariaBookWhatsapp')}
+            >
               {t('hero.ctaBook')}
             </a>
             <NavHashLink className="btn btn--secondary" to="/#contact">

@@ -76,7 +76,9 @@ function buildGraph(
             closes: '20:00',
           },
         ],
-        knowsAbout: knowsAbout,
+        knowsAbout,
+        serviceType:
+          locale === 'ar' ? 'تنظيف منازل ومكاتب وفلل' : 'Residential and commercial cleaning',
       },
       {
         '@type': 'WebSite',

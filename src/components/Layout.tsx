@@ -33,10 +33,20 @@ export default function Layout() {
       <SiteFooter />
       <nav className="mobile-cta-bar md:hidden" aria-label={t('hero.ctaBook')}>
         <div className="mobile-cta-bar__inner">
-          <a className="btn btn--primary" href={wa} target="_blank" rel="noopener noreferrer">
+          <a
+            className="btn btn--primary"
+            href={wa}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t('contact.ariaBookWhatsapp')}
+          >
             {t('hero.ctaBook')}
           </a>
-          <a className="btn btn--call btn--call--compact" href={PHONE_TEL_HREF}>
+          <a
+            className="btn btn--call btn--call--compact"
+            href={PHONE_TEL_HREF}
+            aria-label={t('contact.ariaPhone')}
+          >
             {t('hero.ctaCall')}
           </a>
         </div>
