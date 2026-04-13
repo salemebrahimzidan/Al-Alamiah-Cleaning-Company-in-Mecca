@@ -6,7 +6,13 @@ import logoArabicAvif from '../assets/logo-alamiah.avif'
 import logoArabicWebp from '../assets/logo-alamiah.webp'
 import logoEnglishAvif from '../assets/logo-english.avif'
 import logoEnglishWebp from '../assets/logo-english.webp'
-import { WHATSAPP_HREF_AR, WHATSAPP_HREF_EN } from '../constants/contact'
+import {
+  COMPANY_PHONE_DIGITS,
+  formatPhoneDisplay,
+  PHONE_TEL_HREF,
+  WHATSAPP_HREF_AR,
+  WHATSAPP_HREF_EN,
+} from '../constants/contact'
 
 const NAV_ITEMS = [
   { key: 'nav.home', to: '/#home' },
@@ -49,6 +55,7 @@ function Navbar() {
   const brandLogoAvif = locale === 'en' ? logoEnglishAvif : logoArabicAvif
   const brandLogoWebp = locale === 'en' ? logoEnglishWebp : logoArabicWebp
   const wa = locale === 'ar' ? WHATSAPP_HREF_AR : WHATSAPP_HREF_EN
+  const phoneDisplay = formatPhoneDisplay(COMPANY_PHONE_DIGITS)
 
   useEffect(() => {
     const onResize = () => {
@@ -86,11 +93,11 @@ function Navbar() {
                 src={brandLogoWebp}
                 alt={t('nav.logoAlt')}
                 className="h-full w-full object-contain object-center"
-                width={192}
-                height={192}
+                width={112}
+                height={112}
                 decoding="async"
                 loading="eager"
-                fetchPriority="low"
+                fetchPriority="high"
               />
             </picture>
           </span>
@@ -128,6 +135,16 @@ function Navbar() {
                 : t('language.labelArabic')}
             </span>
           </button>
+
+          <a
+            href={PHONE_TEL_HREF}
+            className={`${toolbarBtn} hidden min-h-[44px] px-3 text-[13px] sm:inline-flex md:px-4 md:text-[14px]`}
+            aria-label={`${t('nav.phoneToolbar')}: ${phoneDisplay}`}
+          >
+            <span dir="ltr" className="font-bold tabular-nums">
+              {phoneDisplay}
+            </span>
+          </a>
 
           <a
             href={wa}
@@ -194,6 +211,15 @@ function Navbar() {
               </NavHashLink>
             </li>
           ))}
+          <li>
+            <a
+              href={PHONE_TEL_HREF}
+              className={`${toolbarBtn} block w-full px-3 py-3 text-base font-bold`}
+              onClick={closeMenu}
+            >
+              <span dir="ltr">{phoneDisplay}</span>
+            </a>
+          </li>
           <li className="pt-1">
             <a
               href={wa}

@@ -3,6 +3,8 @@ export type SeoSlug =
   | 'villa-cleaning-makkah'
   | 'office-cleaning-makkah'
   | 'deep-cleaning-makkah'
+  | 'ac-cleaning-makkah'
+  | 'sofa-carpet-cleaning-makkah'
   | 'al-aziziyah-makkah'
   | 'al-shawqiyah-makkah'
   | 'near-al-haram-makkah'
@@ -22,10 +24,10 @@ const pages: Record<SeoSlug, { ar: SeoPageContent; en: SeoPageContent }> = {
   'home-cleaning-makkah': {
     ar: {
       path: '/services/home-cleaning-makkah',
-      title: 'تنظيف منازل مكة | شركة تنظيف شقق وسكني | شركة العالمية للتنظيف',
+      title: 'تنظيف منازل مكة | تنظيف شقق مكة | شركة تنظيف سكني | شركة العالمية للتنظيف',
       description:
-        'تنظيف منازل في مكة المكرمة بسرعة وجودة عالية. غرف ومطابخ وحمامات ومواد آمنة. احجز عبر واتساب وحدد موعدك اليوم.',
-      h1: 'تنظيف منازل في مكة المكرمة',
+        'تنظيف منازل وشقق في مكة المكرمة بسرعة وجودة عالية. غرف ومطابخ وحمامات ومواد آمنة. احجز عبر واتساب وحدد موعدك اليوم.',
+      h1: 'تنظيف منازل وشقق في مكة المكرمة',
       blocks: [
         {
           type: 'p',
@@ -387,6 +389,210 @@ const pages: Record<SeoSlug, { ar: SeoPageContent; en: SeoPageContent }> = {
       relatedSlugs: ['home-cleaning-makkah', 'villa-cleaning-makkah', 'office-cleaning-makkah'],
     },
   },
+  'ac-cleaning-makkah': {
+    ar: {
+      path: '/services/ac-cleaning-makkah',
+      title: 'تنظيف مكيفات مكة | غسيل وصيانة مكيفات سبليت وشباك | شركة العالمية للتنظيف',
+      description:
+        'تنظيف مكيفات في مكة المكرمة: وحدات سبليت وشباك، فلاتر، ملفات، وتصريف التكثيف. هواء أنظف وكفاءة أفضل. احجز عبر واتساب.',
+      h1: 'تنظيف مكيفات في مكة المكرمة',
+      blocks: [
+        {
+          type: 'p',
+          text: 'المكيفات في مناخ مكة تحتاج تنظيفاً دورياً لتراكم الغبار على الفلاتر والملفات وتكوّن الرطوبة في مجاري التصريف. نوفّر زيارة منظمة تشمل فحصاً سريعاً للوحدة الداخلية والخارجية حسب إمكانية الوصول، وتنظيفاً يهدف إلى تحسين تدفق الهواء وتقليل الروائح.',
+        },
+        {
+          type: 'h2',
+          text: 'لماذا تنظيف المكيف مهم في مكة؟',
+        },
+        {
+          type: 'p',
+          text: 'الغبار والرطوبة يقلّلان كفاءة التبريد وقد يزيدان استهلاك الكهرباء. تنظيف فلاتر الهواء والملفات يساعد على هواء أنظف داخل الشقة أو الفيلا، خاصة لمن يعانون حساسية أو يوجد أطفال.',
+        },
+        {
+          type: 'h2',
+          text: 'ماذا يشمل تنظيف المكيف عادة؟',
+        },
+        {
+          type: 'h3',
+          text: 'الوحدة الداخلية والفلاتر',
+        },
+        {
+          type: 'p',
+          text: 'تنظيف غطاء الوحدة وفلاتر الهواء القابلة للغسل، إزالة الغبار من الملفات بعناية حسب نوع الجهاز، وتفريغ أو تسليك خط التصريف عند الحاجة لتقليل تسرب المياه.',
+        },
+        {
+          type: 'h3',
+          text: 'الوحدة الخارجية عند الإمكان',
+        },
+        {
+          type: 'p',
+          text: 'عند توفر وصول آمن، ننظّف المبادل الخارجي من الغبار والأوراق لتحسين تبديد الحرارة. إن كان الوصول صعباً، نوضح ذلك قبل الزيارة.',
+        },
+        {
+          type: 'h2',
+          text: 'احجز تنظيف مكيفات في مكة عبر واتساب',
+        },
+        {
+          type: 'p',
+          text: 'أرسل نوع المكيف (سبليت / شباك / عدد الوحدات) والحي في مكة والتاريخ المناسب. سنرد بعرض واضح ومدة تقريبية للزيارة.',
+        },
+      ],
+      relatedSlugs: ['home-cleaning-makkah', 'deep-cleaning-makkah', 'sofa-carpet-cleaning-makkah'],
+    },
+    en: {
+      path: '/services/ac-cleaning-makkah',
+      title: 'AC Cleaning in Mecca | Split & Window Units | Al-Alamiya Cleaning',
+      description:
+        'Air conditioner cleaning in Makkah: filters, coils, and condensate lines for cleaner air and better cooling. Book on WhatsApp.',
+      h1: 'Air Conditioner Cleaning in Mecca (Makkah)',
+      blocks: [
+        {
+          type: 'p',
+          text: 'AC units in Makkah’s climate benefit from regular cleaning as dust builds on filters and coils and moisture can collect in drain lines. We organize a structured visit for indoor units and outdoor units when safe access is available.',
+        },
+        {
+          type: 'h2',
+          text: 'Why AC cleaning matters here',
+        },
+        {
+          type: 'p',
+          text: 'Dust and moisture reduce efficiency and can affect indoor air quality—especially for families and allergy-sensitive households.',
+        },
+        {
+          type: 'h2',
+          text: 'What’s typically included',
+        },
+        {
+          type: 'h3',
+          text: 'Indoor unit & filters',
+        },
+        {
+          type: 'p',
+          text: 'Covers, washable filters, careful coil surface cleaning by unit type, and drain line clearing when needed to reduce leaks.',
+        },
+        {
+          type: 'h3',
+          text: 'Outdoor condenser when accessible',
+        },
+        {
+          type: 'p',
+          text: 'Debris removal from the outdoor coil when access is safe; we confirm limitations before the visit.',
+        },
+        {
+          type: 'h2',
+          text: 'Book AC cleaning on WhatsApp',
+        },
+        {
+          type: 'p',
+          text: 'Send unit type (split/window), number of units, district in Makkah, and your preferred date for a clear quote.',
+        },
+      ],
+      relatedSlugs: ['home-cleaning-makkah', 'deep-cleaning-makkah', 'sofa-carpet-cleaning-makkah'],
+    },
+  },
+  'sofa-carpet-cleaning-makkah': {
+    ar: {
+      path: '/services/sofa-carpet-cleaning-makkah',
+      title: 'تنظيف كنب وسجاد مكة | تنميع وغسيل بالبخار | شركة العالمية للتنظيف',
+      description:
+        'تنظيف كنب وسجاد في مكة المكرمة: إزالة بقع، روائح، وغبار. مناسب للمجالس والغرف. احجز عبر واتساب مع نوع القماش والمساحة.',
+      h1: 'تنظيف كنب وسجاد في مكة المكرمة',
+      blocks: [
+        {
+          type: 'p',
+          text: 'الكنب والسجاد يمتص الغبار والبقع ويحتفظ بالروائح مع الاستخدام اليومي والضيافة. نقدم تنظيفاً يُنسَّق حسب نوع القماش واللون والحالة: من التنظيف السطحي المعزز إلى التنظيف بالبخار أو الشامبو حيث يناسب المادة ونتائج اختبار بسيط على زاوية مخفية عند الحاجة.',
+        },
+        {
+          type: 'h2',
+          text: 'متى تحتاج تنظيف الكنب والسجاد في مكة؟',
+        },
+        {
+          type: 'p',
+          text: 'قبل المناسبات، بعد سكب مشروب أو طعام، عند ظهور روائح، أو كجزء من تنظيف عميق للمنزل أو الفيلا. الشقق قرب الحرم والعزيزية والشوقية شائعة الطلب—ننسق الحجم والوقت معك.',
+        },
+        {
+          type: 'h2',
+          text: 'كيف نعمل؟',
+        },
+        {
+          type: 'h3',
+          text: 'تقييم سريع للقماش والبقع',
+        },
+        {
+          type: 'p',
+          text: 'نناقش لون الكنب أو السجاد، وجود حيوانات أليفة، ونوع البقع. هذا يحدد طريقة التنظيف الأنسب لتقليل مخاطر بهتان اللون أو تلف النسيج.',
+        },
+        {
+          type: 'h3',
+          text: 'التنفيذ والتجفيف',
+        },
+        {
+          type: 'p',
+          text: 'نراعي التهوية ووقت الجفاف حسب الطريقة المستخدمة. للمساحات الكبيرة أو عدة قطع، قد نقسم العمل على أكثر من مرحلة أو يوم حسب الاتفاق.',
+        },
+        {
+          type: 'h2',
+          text: 'اطلب عرضاً عبر واتساب',
+        },
+        {
+          type: 'p',
+          text: 'أرسل صوراً بسيطة إن أمكن، عدد القطع، تقريباً المساحة، والحي في مكة لنحدد السعر والمدة.',
+        },
+      ],
+      relatedSlugs: ['deep-cleaning-makkah', 'home-cleaning-makkah', 'villa-cleaning-makkah'],
+    },
+    en: {
+      path: '/services/sofa-carpet-cleaning-makkah',
+      title: 'Sofa & Carpet Cleaning in Mecca | Steam & Shampoo | Al-Alamiya Cleaning',
+      description:
+        'Upholstery and carpet cleaning in Makkah: stains, odors, and dust removal for majlis and living areas. WhatsApp us with fabric type and size.',
+      h1: 'Sofa & Carpet Cleaning in Mecca (Makkah)',
+      blocks: [
+        {
+          type: 'p',
+          text: 'Sofas and carpets trap dust, spills, and odors—especially with guests and daily use. We plan the method around fabric type and condition, from enhanced surface cleaning to steam or shampoo approaches when suitable, with discreet spot tests when needed.',
+        },
+        {
+          type: 'h2',
+          text: 'When to book upholstery & carpet cleaning',
+        },
+        {
+          type: 'p',
+          text: 'Before events, after spills, when odors appear, or as part of deep home or villa cleaning. We coordinate scope and timing across Makkah districts.',
+        },
+        {
+          type: 'h2',
+          text: 'How we work',
+        },
+        {
+          type: 'h3',
+          text: 'Fabric & stain assessment',
+        },
+        {
+          type: 'p',
+          text: 'We align on colorfastness risks, pets, and stain types to choose a safer approach.',
+        },
+        {
+          type: 'h3',
+          text: 'Drying & ventilation',
+        },
+        {
+          type: 'p',
+          text: 'We factor drying time into the plan; large jobs may be staged across sessions by agreement.',
+        },
+        {
+          type: 'h2',
+          text: 'WhatsApp for a quote',
+        },
+        {
+          type: 'p',
+          text: 'Photos help—send piece count, approximate size, and your district in Makkah.',
+        },
+      ],
+      relatedSlugs: ['deep-cleaning-makkah', 'home-cleaning-makkah', 'villa-cleaning-makkah'],
+    },
+  },
   'al-aziziyah-makkah': {
     ar: {
       path: '/locations/al-aziziyah-makkah',
@@ -604,6 +810,8 @@ export const SEO_SERVICE_SLUGS: SeoSlug[] = [
   'villa-cleaning-makkah',
   'office-cleaning-makkah',
   'deep-cleaning-makkah',
+  'ac-cleaning-makkah',
+  'sofa-carpet-cleaning-makkah',
 ]
 
 export const SEO_LOCATION_SLUGS: SeoSlug[] = [
