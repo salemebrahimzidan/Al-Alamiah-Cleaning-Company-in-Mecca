@@ -10,7 +10,12 @@ const messages = { ar, en }
 
 type FaqItem = { q: string; a: string }
 
-function buildGraph(homeUrl: string, locale: 'ar' | 'en', faqItems: FaqItem[]) {
+function buildGraph(
+  homeUrl: string,
+  locale: 'ar' | 'en',
+  faqItems: FaqItem[],
+  businessImageUrl: string,
+) {
   const m = messages[locale]
   const phone = `+${COMPANY_PHONE_DIGITS}`
 
@@ -25,7 +30,7 @@ function buildGraph(homeUrl: string, locale: 'ar' | 'en', faqItems: FaqItem[]) {
         url: homeUrl,
         telephone: phone,
         email: COMPANY_EMAIL,
-        image: absoluteAppUrl('favicon.svg'),
+        image: businessImageUrl || absoluteAppUrl('favicon.svg'),
         address: {
           '@type': 'PostalAddress',
           addressLocality: locale === 'ar' ? 'مكة المكرمة' : 'Mecca',
@@ -68,14 +73,15 @@ function buildGraph(homeUrl: string, locale: 'ar' | 'en', faqItems: FaqItem[]) {
 
 export default function SeoJsonLd() {
   const { locale } = useLanguage()
-  const faqItems = messages[locale].faq.items as FaqItem[]
 
   const json = useMemo(() => {
     const origin = getSiteOrigin()
     if (!origin) return ''
     const homeUrl = absoluteAppUrl()
-    return JSON.stringify(buildGraph(homeUrl, locale, faqItems))
-  }, [locale, faqItems])
+    const faqItems = messages[locale].faq.items as FaqItem[]
+    const businessImageUrl = absoluteAppUrl('og-image.webp')
+    return JSON.stringify(buildGraph(homeUrl, locale, faqItems, businessImageUrl))
+  }, [locale])
 
   if (!json) return null
 

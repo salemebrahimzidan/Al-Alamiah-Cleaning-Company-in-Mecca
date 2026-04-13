@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import NavHashLink from './NavHashLink'
 import { useLanguage } from '../context/LanguageContext'
-import logoArabic from '../assets/logo-alamiah.png'
-import logoEnglish from '../assets/logo-english.png'
+import logoArabic from '../assets/logo-alamiah.webp'
+import logoEnglish from '../assets/logo-english.webp'
 import { WHATSAPP_HREF_AR, WHATSAPP_HREF_EN } from '../constants/contact'
 
 const NAV_ITEMS = [
@@ -33,7 +33,7 @@ const navLinkClass =
   'transition-[background,border-color,color] duration-300 ease-out ' +
   'hover:border-(--border) hover:bg-(--surface) hover:text-(--text-strong) lg:text-[15px]'
 
-export default function Navbar() {
+function Navbar() {
   const { t, locale, toggleLocale } = useLanguage()
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -85,6 +85,7 @@ export default function Navbar() {
               width={160}
               height={160}
               decoding="async"
+              loading="eager"
             />
           </span>
           <span className="hidden min-w-0 flex-col leading-tight sm:flex">
@@ -203,3 +204,5 @@ export default function Navbar() {
     </header>
   )
 }
+
+export default memo(Navbar)

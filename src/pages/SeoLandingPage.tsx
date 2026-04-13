@@ -31,6 +31,7 @@ export default function SeoLandingPage({ area }: { area: Area }) {
 
   const page = getSeoPage(slug, locale)!
   const canonical = absoluteAppUrl(page.path.replace(/^\//, ''))
+  const ogImage = absoluteAppUrl('og-image.webp')
 
   return (
     <>
@@ -43,6 +44,9 @@ export default function SeoLandingPage({ area }: { area: Area }) {
         <meta property="og:description" content={page.description} />
         {canonical ? <meta property="og:url" content={canonical} /> : null}
         <meta property="og:locale" content={t('seo.ogLocale')} />
+        {ogImage ? <meta property="og:image" content={ogImage} /> : null}
+        <meta name="twitter:card" content="summary_large_image" />
+        {ogImage ? <meta name="twitter:image" content={ogImage} /> : null}
       </Helmet>
 
       <main className="site-main seo-page">
