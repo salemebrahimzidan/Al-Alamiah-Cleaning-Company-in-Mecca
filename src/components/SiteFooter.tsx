@@ -8,6 +8,8 @@ const SERVICE_PATHS = [
   { to: '/services/villa-cleaning-makkah', key: 'servicePages.villa' as const },
   { to: '/services/office-cleaning-makkah', key: 'servicePages.office' as const },
   { to: '/services/deep-cleaning-makkah', key: 'servicePages.deep' as const },
+  { to: '/services/ac-cleaning-makkah', key: 'servicePages.ac' as const },
+  { to: '/services/sofa-carpet-cleaning-makkah', key: 'servicePages.sofaCarpet' as const },
 ]
 
 const LOCATION_PATHS = [

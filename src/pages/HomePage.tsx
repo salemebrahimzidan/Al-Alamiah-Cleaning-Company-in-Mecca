@@ -19,6 +19,7 @@ import SeoJsonLd from '../components/SeoJsonLd'
 import {
   COMPANY_EMAIL,
   COMPANY_PHONE_DIGITS,
+  formatPhoneDisplay,
   PHONE_TEL_HREF,
   WHATSAPP_HREF_AR,
   WHATSAPP_HREF_EN,
@@ -33,7 +34,7 @@ const SERVICE_KEYS = ['steam', 'pest', 'deep', 'quick'] as const
 const WHY_KEYS = ['team', 'eco', 'punctual'] as const
 
 const SERVICE_DETAIL_PATH: Record<(typeof SERVICE_KEYS)[number], string> = {
-  steam: '/services/deep-cleaning-makkah',
+  steam: '/services/sofa-carpet-cleaning-makkah',
   pest: '/#contact',
   deep: '/services/deep-cleaning-makkah',
   quick: '/services/home-cleaning-makkah',
@@ -44,6 +45,8 @@ const SERVICE_HUB = [
   { to: '/services/villa-cleaning-makkah', key: 'servicePages.villa' as const },
   { to: '/services/office-cleaning-makkah', key: 'servicePages.office' as const },
   { to: '/services/deep-cleaning-makkah', key: 'servicePages.deep' as const },
+  { to: '/services/ac-cleaning-makkah', key: 'servicePages.ac' as const },
+  { to: '/services/sofa-carpet-cleaning-makkah', key: 'servicePages.sofaCarpet' as const },
   { to: '/locations/al-aziziyah-makkah', key: 'servicePages.locAziziyah' as const },
   { to: '/locations/al-shawqiyah-makkah', key: 'servicePages.locShawqiyah' as const },
   { to: '/locations/near-al-haram-makkah', key: 'servicePages.locHaram' as const },
@@ -51,13 +54,7 @@ const SERVICE_HUB = [
 
 const messages = { ar, en }
 
-function formatPhoneDisplay(digits: string) {
-  if (digits.length === 12 && digits.startsWith('966')) {
-    const r = digits.slice(3)
-    return `+966 ${r.slice(0, 2)} ${r.slice(2, 5)} ${r.slice(5)}`
-  }
-  return `+${digits}`
-}
+const TRUST_STAT_KEYS = ['a', 'b', 'c', 'd'] as const
 
 const serviceIcons = {
   steam: IconSteam,
@@ -96,6 +93,14 @@ export default function HomePage() {
         <meta name="twitter:title" content={t('pageTitle')} />
         <meta name="twitter:description" content={t('seo.metaDescription')} />
         {ogImage ? <meta name="twitter:image" content={ogImage} /> : null}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        {canonical ? (
+          <>
+            <link rel="alternate" hrefLang="ar-SA" href={canonical} />
+            <link rel="alternate" hrefLang="en-SA" href={canonical} />
+            <link rel="alternate" hrefLang="x-default" href={canonical} />
+          </>
+        ) : null}
       </Helmet>
       <SeoJsonLd />
 
@@ -115,6 +120,15 @@ export default function HomePage() {
               <li>{t('trustStrip.b')}</li>
               <li>{t('trustStrip.c')}</li>
               <li>{t('trustStrip.d')}</li>
+            </ul>
+
+            <ul className="trust-stats" aria-label={t('trustStats.aria')}>
+              {TRUST_STAT_KEYS.map((k) => (
+                <li key={k} className="trust-stat">
+                  <strong className="trust-stat__label">{t(`trustStats.${k}Label`)}</strong>
+                  <span className="trust-stat__hint">{t(`trustStats.${k}Hint`)}</span>
+                </li>
+              ))}
             </ul>
 
             <div className="page-hero__highlights">
@@ -148,6 +162,56 @@ export default function HomePage() {
               <a className="btn btn--secondary" href="#contact">
                 {t('hero.ctaContact')}
               </a>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="makkah-services"
+          className="section section--alt scroll-mt-20"
+          aria-labelledby="local-makkah-heading"
+        >
+          <div className="container">
+            <h2 id="local-makkah-heading" className="section__title">
+              {t('localMakkah.sectionTitle')}
+            </h2>
+            <p className="section__lead">{t('localMakkah.sectionLead')}</p>
+            <div className="local-seo-block">
+              <p>{t('localMakkah.intro')}</p>
+
+              <h3>{t('localMakkah.hHomes')}</h3>
+              <p>{t('localMakkah.pHomes')}</p>
+              <p>
+                <Link className="local-seo-block__link" to="/services/home-cleaning-makkah">
+                  {t('localMakkah.linkHomes')} →
+                </Link>
+              </p>
+
+              <h3>{t('localMakkah.hVillas')}</h3>
+              <p>{t('localMakkah.pVillas')}</p>
+              <p>
+                <Link className="local-seo-block__link" to="/services/villa-cleaning-makkah">
+                  {t('localMakkah.linkVillas')} →
+                </Link>
+              </p>
+
+              <h3>{t('localMakkah.hAc')}</h3>
+              <p>{t('localMakkah.pAc')}</p>
+              <p>
+                <Link className="local-seo-block__link" to="/services/ac-cleaning-makkah">
+                  {t('localMakkah.linkAc')} →
+                </Link>
+              </p>
+
+              <h3>{t('localMakkah.hUpholstery')}</h3>
+              <p>{t('localMakkah.pUpholstery')}</p>
+              <p>
+                <Link className="local-seo-block__link" to="/services/sofa-carpet-cleaning-makkah">
+                  {t('localMakkah.linkUpholstery')} →
+                </Link>
+              </p>
+
+              <p className="local-seo-block__cta">{t('localMakkah.ctaNote')}</p>
             </div>
           </div>
         </section>
@@ -347,6 +411,7 @@ export default function HomePage() {
                     src="https://www.openstreetmap.org/export/embed.html?bbox=39.805%2C21.405%2C39.835%2C21.435&amp;layer=mapnik"
                     className="map-embed__frame"
                     loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
                   />
                 </div>
               </div>

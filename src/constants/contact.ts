@@ -1,6 +1,14 @@
 /** رقم الشركة (بدون +) — يُستخدم لـ wa.me و tel: */
 export const COMPANY_PHONE_DIGITS = '966548607610'
 
+export function formatPhoneDisplay(digits: string): string {
+  if (digits.length === 12 && digits.startsWith('966')) {
+    const r = digits.slice(3)
+    return `+966 ${r.slice(0, 2)} ${r.slice(2, 5)} ${r.slice(5)}`
+  }
+  return `+${digits}`
+}
+
 const WA_PREFILL_AR =
   'مرحباً، أرغب بحجز تنظيف في مكة المكرمة.\nالحي: \nنوع الخدمة: \nالتاريخ المناسب: '
 

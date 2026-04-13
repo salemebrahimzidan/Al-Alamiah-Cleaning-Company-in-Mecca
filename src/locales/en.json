@@ -1,8 +1,17 @@
 {
-  "pageTitle": "Cleaning Company in Mecca | Home, Villa & Office | Al-Alamiya Cleaning",
+  "pageTitle": "Cleaning Company in Mecca | Homes, Apartments, Villas, AC & Upholstery | Al-Alamiya",
   "seo": {
-    "metaDescription": "Mecca cleaning company for homes, villas, offices & deep cleaning near Al Haram. Fast scheduling, trained team & safe products. Book on WhatsApp.",
-    "ogLocale": "en_US"
+    "metaDescription": "Mecca (Makkah) cleaning company: homes, apartments, villas, AC cleaning, sofa & carpet cleaning, deep cleaning & offices near Al Haram, Al Aziziyah & Al Shawqiyah. Fast replies on WhatsApp or phone.",
+    "ogLocale": "en_US",
+    "knowsAbout": [
+      "Cleaning company in Mecca",
+      "Makkah home cleaning",
+      "Apartment cleaning Mecca",
+      "Villa cleaning Makkah",
+      "AC cleaning Mecca",
+      "Sofa and carpet cleaning Mecca",
+      "Deep cleaning Makkah"
+    ]
   },
   "nav": {
     "ariaMain": "Main navigation",
@@ -15,6 +24,7 @@
     "whyUs": "Why Us",
     "contact": "Contact",
     "whatsapp": "WhatsApp",
+    "phoneToolbar": "Call",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "mobileNav": "Mobile navigation"
@@ -26,10 +36,10 @@
     "labelArabic": "العربية"
   },
   "hero": {
-    "kicker": "Mecca · Trusted cleaning · WhatsApp booking",
-    "headline": "Cleaning company in Mecca — professional home & office cleaning",
+    "kicker": "Mecca (Makkah) · Local cleaning team",
+    "headline": "Cleaning company in Mecca — residential & commercial services",
     "subheadBrand": "Al-Alamiya Cleaning",
-    "tagline": "Professional cleaning for homes, villas, and offices—deep cleaning, steam where suitable, and pest control. Book fast on WhatsApp.",
+    "tagline": "Homes, apartments & villas in Makkah, AC cleaning, sofa & carpet care, deep cleaning & offices—steam where suitable, plus pest control. Quick replies on WhatsApp or phone.",
     "highlightSteam": "Steam cleaning",
     "highlightPest": "Pest control",
     "highlightFast": "Fast & reliable",
@@ -43,6 +53,35 @@
     "c": "On-time service",
     "d": "Follow-up care"
   },
+  "trustStats": {
+    "aria": "Trust signals: experience, response, coverage",
+    "aLabel": "Local experience",
+    "aHint": "Serving Makkah districts",
+    "bLabel": "Fast response",
+    "bHint": "WhatsApp during business hours",
+    "cLabel": "Wide coverage",
+    "cHint": "Al Aziziyah, Al Shawqiyah, near Haram",
+    "dLabel": "Trusted service",
+    "dHint": "Clear standards & follow-up"
+  },
+  "localMakkah": {
+    "sectionTitle": "Local cleaning & hygiene services in Makkah",
+    "sectionLead": "Practical services for people searching for a cleaning company in Mecca—homes, apartments, villas, AC units, and upholstery—with clear booking and local coverage.",
+    "intro": "Whether you need house cleaning, apartment cleaning, or villa cleaning in Makkah, we align scope, timing, and district—including Al Aziziyah, Al Shawqiyah, and near Al Haram when access allows. We also provide AC cleaning for cleaner air and better cooling, plus sofa and carpet cleaning for majlis and living spaces with fabric-safe methods.",
+    "hHomes": "House & apartment cleaning in Mecca",
+    "pHomes": "Residential visits cover kitchens, bathrooms, floors, surfaces, and dusting, with add-ons like interior windows when agreed. Ideal for families and tenants who want recurring visits or move-in deep cleaning.",
+    "linkHomes": "House & apartment cleaning page",
+    "hVillas": "Villa cleaning in Makkah",
+    "pVillas": "Villas need coordination across floors, entrances, and guest areas. We stage the work and align priorities—before hosting guests or after maintenance and painting when needed.",
+    "linkVillas": "Villa cleaning page",
+    "hAc": "AC cleaning in Mecca",
+    "pAc": "We clean indoor filters and coils, clear condensate lines when needed, and service outdoor units when safe access is available—reducing odors and improving efficiency in Makkah’s climate.",
+    "linkAc": "AC cleaning page",
+    "hUpholstery": "Sofa & carpet cleaning in Makkah",
+    "pUpholstery": "For stains, odors, and dust on sofas and carpets we choose steam or shampoo methods when suitable, with discreet spot tests when needed.",
+    "linkUpholstery": "Sofa & carpet cleaning page",
+    "ctaNote": "To book: message us on WhatsApp with your district and service, or call from the top bar or contact section."
+  },
   "servicePages": {
     "sectionTitle": "Services in Makkah (full pages)",
     "sectionLead": "Local SEO pages—pick a service and message us on WhatsApp.",
@@ -52,7 +91,9 @@
     "deep": "Deep cleaning",
     "locAziziyah": "Al Aziziyah",
     "locShawqiyah": "Al Shawqiyah",
-    "locHaram": "Near Al Haram"
+    "locHaram": "Near Al Haram",
+    "ac": "AC cleaning",
+    "sofaCarpet": "Sofa & carpet"
   },
   "about": {
     "sectionTitle": "About us",
@@ -69,7 +110,7 @@
     "cards": {
       "steam": {
         "title": "Steam cleaning",
-        "desc": "Deep steam cleaning for homes and offices to remove dirt, grease, and allergens."
+        "desc": "Steam where fabric and surfaces allow—ideal as part of sofa, carpet, and home cleaning in Makkah."
       },
       "pest": {
         "title": "Pest control",
@@ -149,6 +190,18 @@
       {
         "q": "Do you offer contracts for offices?",
         "a": "Yes—recurring visits for offices and retail spaces in Makkah based on your schedule."
+      },
+      {
+        "q": "Do you clean AC units (split or window) in Makkah?",
+        "a": "Yes—indoor filters and coils, condensate lines when needed, and outdoor units when safe access is available. WhatsApp your unit type and count."
+      },
+      {
+        "q": "How much does sofa or carpet cleaning cost?",
+        "a": "It depends on piece count, area, fabric, and stains. Photos on WhatsApp help us quote fairly before the visit."
+      },
+      {
+        "q": "Do you serve Al Aziziyah, Al Shawqiyah, and near Al Haram?",
+        "a": "Yes—across Makkah by arrangement and access. Mention your district when booking so we can schedule realistically."
       }
     ]
   }

@@ -4,7 +4,13 @@ import NavHashLink from './NavHashLink'
 import { useLanguage } from '../context/LanguageContext'
 import logoArabic from '../assets/logo-alamiah.webp'
 import logoEnglish from '../assets/logo-english.webp'
-import { WHATSAPP_HREF_AR, WHATSAPP_HREF_EN } from '../constants/contact'
+import {
+  COMPANY_PHONE_DIGITS,
+  formatPhoneDisplay,
+  PHONE_TEL_HREF,
+  WHATSAPP_HREF_AR,
+  WHATSAPP_HREF_EN,
+} from '../constants/contact'
 
 const NAV_ITEMS = [
   { key: 'nav.home', to: '/#home' },
@@ -46,6 +52,7 @@ function Navbar() {
 
   const brandLogoSrc = locale === 'en' ? logoEnglish : logoArabic
   const wa = locale === 'ar' ? WHATSAPP_HREF_AR : WHATSAPP_HREF_EN
+  const phoneDisplay = formatPhoneDisplay(COMPANY_PHONE_DIGITS)
 
   useEffect(() => {
     const onResize = () => {
@@ -82,10 +89,11 @@ function Navbar() {
               alt={t('nav.logoAlt')}
               key={locale}
               className="h-full w-full object-contain object-center"
-              width={160}
-              height={160}
+              width={112}
+              height={112}
               decoding="async"
               loading="eager"
+              fetchPriority="high"
             />
           </span>
           <span className="hidden min-w-0 flex-col leading-tight sm:flex">
@@ -122,6 +130,16 @@ function Navbar() {
                 : t('language.labelArabic')}
             </span>
           </button>
+
+          <a
+            href={PHONE_TEL_HREF}
+            className={`${toolbarBtn} hidden min-h-[44px] px-3 text-[13px] sm:inline-flex md:px-4 md:text-[14px]`}
+            aria-label={`${t('nav.phoneToolbar')}: ${phoneDisplay}`}
+          >
+            <span dir="ltr" className="font-bold tabular-nums">
+              {phoneDisplay}
+            </span>
+          </a>
 
           <a
             href={wa}
@@ -188,6 +206,15 @@ function Navbar() {
               </NavHashLink>
             </li>
           ))}
+          <li>
+            <a
+              href={PHONE_TEL_HREF}
+              className={`${toolbarBtn} block w-full px-3 py-3 text-base font-bold`}
+              onClick={closeMenu}
+            >
+              <span dir="ltr">{phoneDisplay}</span>
+            </a>
+          </li>
           <li className="pt-1">
             <a
               href={wa}
