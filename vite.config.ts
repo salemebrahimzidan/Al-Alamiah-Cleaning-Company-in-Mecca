@@ -28,4 +28,3 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }))
-///new version of vite.config.ts
