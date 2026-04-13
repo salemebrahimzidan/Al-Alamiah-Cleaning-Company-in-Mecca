@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig(({ mode }) => ({
   plugins: [tailwindcss(), react()],
+
   base:
     mode === 'github'
       ? '/Al-Alamiah-Cleaning-Company-in-Mecca/'
