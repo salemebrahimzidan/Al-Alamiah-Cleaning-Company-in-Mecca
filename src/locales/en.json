@@ -2,7 +2,9 @@
   "pageTitle": "Cleaning Company in Mecca | Home, Villa & Office | Al-Alamiya Cleaning",
   "seo": {
     "metaDescription": "Mecca cleaning company for homes, villas, offices & deep cleaning near Al Haram. Fast scheduling, trained team & safe products. Book on WhatsApp.",
-    "ogLocale": "en_US"
+    "ogLocale": "en_US",
+    "ogImageAlt": "Al-Alamiya Cleaning logo — professional cleaning services in Mecca",
+    "loadingPage": "Loading page"
   },
   "nav": {
     "ariaMain": "Main navigation",
@@ -38,6 +40,7 @@
     "ctaContact": "Contact us"
   },
   "trustStrip": {
+    "ariaListLabel": "Quick highlights about our cleaning service",
     "a": "Mecca experience",
     "b": "Safe products",
     "c": "On-time service",
@@ -106,11 +109,16 @@
     "sectionLead": "Phone, email, or WhatsApp — we respond quickly.",
     "addressTitle": "Location",
     "addressBody": "Serving Mecca and nearby areas by arrangement.",
-    "mapTitle": "Map",
+    "mapTitle": "Interactive map of the Mecca area (OpenStreetMap)",
+    "mapLoading": "Loading map",
     "phoneCard": "Phone",
     "emailCard": "Email",
     "whatsappCard": "WhatsApp",
-    "whatsappCtaLine": "Chat on WhatsApp"
+    "whatsappCtaLine": "Chat on WhatsApp",
+    "ariaPhone": "Call Al-Alamiya Cleaning by phone",
+    "ariaEmail": "Send email to Al-Alamiya Cleaning",
+    "ariaWhatsapp": "Open WhatsApp to book or ask Al-Alamiya Cleaning",
+    "ariaBookWhatsapp": "Book on WhatsApp — opens in a new tab"
   },
   "footer": {
     "rights": "All rights reserved.",

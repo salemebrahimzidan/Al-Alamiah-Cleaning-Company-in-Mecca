@@ -27,6 +27,7 @@ function buildGraph(
         '@id': `${homeUrl}#business`,
         name: m.nav.brandName,
         alternateName: locale === 'ar' ? 'Al-Alamiya Cleaning' : 'شركة العالمية للتنظيف',
+        description: m.seo.metaDescription,
         url: homeUrl,
         telephone: phone,
         email: COMPANY_EMAIL,
@@ -37,6 +38,11 @@ function buildGraph(
           addressRegion: locale === 'ar' ? 'منطقة مكة المكرمة' : 'Makkah Province',
           addressCountry: 'SA',
         },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 21.3891,
+          longitude: 39.8579,
+        },
         areaServed: [
           { '@type': 'City', name: locale === 'ar' ? 'مكة المكرمة' : 'Mecca' },
           {
@@ -46,6 +52,7 @@ function buildGraph(
         ],
         priceRange: '$$',
         inLanguage: locale,
+        serviceType: locale === 'ar' ? 'تنظيف منازل ومكاتب وفلل' : 'Residential and commercial cleaning',
       },
       {
         '@type': 'WebSite',

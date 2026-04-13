@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Set absolute sitemap URL in Google Search Console after you have a final domain, e.g.:
-# Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://al-alamiah-cleaning-company.vercel.app/sitemap.xml
