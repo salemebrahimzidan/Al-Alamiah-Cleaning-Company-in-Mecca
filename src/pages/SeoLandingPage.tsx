@@ -46,7 +46,14 @@ export default function SeoLandingPage({ area }: { area: Area }) {
         <meta property="og:locale" content={t('seo.ogLocale')} />
         {ogImage ? <meta property="og:image" content={ogImage} /> : null}
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={page.title} />
+        <meta name="twitter:description" content={page.description} />
         {ogImage ? <meta name="twitter:image" content={ogImage} /> : null}
+        {ogImage ? <meta name="twitter:image:alt" content={t('seo.ogImageAlt')} /> : null}
+        {ogImage ? <meta property="og:image:width" content="1200" /> : null}
+        {ogImage ? <meta property="og:image:height" content="630" /> : null}
+        {ogImage ? <meta property="og:image:type" content="image/webp" /> : null}
+        {ogImage ? <meta property="og:image:alt" content={t('seo.ogImageAlt')} /> : null}
       </Helmet>
 
       <main className="site-main seo-page">
@@ -87,7 +94,13 @@ export default function SeoLandingPage({ area }: { area: Area }) {
           </div>
 
           <div className="seo-page__cta">
-            <a className="btn btn--primary" href={wa} target="_blank" rel="noopener noreferrer">
+            <a
+              className="btn btn--primary"
+              href={wa}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('contact.ariaBookWhatsapp')}
+            >
               {t('hero.ctaBook')}
             </a>
             <NavHashLink className="btn btn--secondary" to="/#contact">

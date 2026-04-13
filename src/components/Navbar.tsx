@@ -2,8 +2,10 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import NavHashLink from './NavHashLink'
 import { useLanguage } from '../context/LanguageContext'
-import logoArabic from '../assets/logo-alamiah.webp'
-import logoEnglish from '../assets/logo-english.webp'
+import logoArabicAvif from '../assets/logo-alamiah.avif'
+import logoArabicWebp from '../assets/logo-alamiah.webp'
+import logoEnglishAvif from '../assets/logo-english.avif'
+import logoEnglishWebp from '../assets/logo-english.webp'
 import { WHATSAPP_HREF_AR, WHATSAPP_HREF_EN } from '../constants/contact'
 
 const NAV_ITEMS = [
@@ -44,7 +46,8 @@ function Navbar() {
     [t],
   )
 
-  const brandLogoSrc = locale === 'en' ? logoEnglish : logoArabic
+  const brandLogoAvif = locale === 'en' ? logoEnglishAvif : logoArabicAvif
+  const brandLogoWebp = locale === 'en' ? logoEnglishWebp : logoArabicWebp
   const wa = locale === 'ar' ? WHATSAPP_HREF_AR : WHATSAPP_HREF_EN
 
   useEffect(() => {
@@ -77,16 +80,19 @@ function Navbar() {
           onClick={closeMenu}
         >
           <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-1 shadow-[0_4px_14px_rgba(0,0,0,0.08)] ring-1 ring-[#f3f4f6] sm:h-14 sm:w-14 sm:p-1.5">
-            <img
-              src={brandLogoSrc}
-              alt={t('nav.logoAlt')}
-              key={locale}
-              className="h-full w-full object-contain object-center"
-              width={160}
-              height={160}
-              decoding="async"
-              loading="eager"
-            />
+            <picture key={locale}>
+              <source srcSet={brandLogoAvif} type="image/avif" />
+              <img
+                src={brandLogoWebp}
+                alt={t('nav.logoAlt')}
+                className="h-full w-full object-contain object-center"
+                width={192}
+                height={192}
+                decoding="async"
+                loading="eager"
+                fetchPriority="low"
+              />
+            </picture>
           </span>
           <span className="hidden min-w-0 flex-col leading-tight sm:flex">
             <span className="text-xs font-semibold text-(--muted) md:text-[13px]">
