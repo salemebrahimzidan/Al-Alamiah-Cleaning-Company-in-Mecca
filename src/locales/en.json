@@ -47,7 +47,33 @@
     "highlightFast": "Fast & reliable",
     "ctaBook": "WhatsApp — book now",
     "ctaCall": "Call now",
-    "ctaContact": "Contact us"
+    "ctaContact": "Contact us",
+    "mosaicHeading": "Trust & highlights"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "viewService": "View service",
+    "allServices": "View all services"
+  },
+  "homePreview": {
+    "servicesTitle": "Services in Makkah",
+    "servicesLead": "Each service has its own page with full details and booking.",
+    "servicesTeaser": "Browse every service on the dedicated services page—quick booking on WhatsApp.",
+    "officeBlurb": "Recurring or one-off office cleaning with clear scope and timing.",
+    "deepBlurb": "Move-in, post-work, or top-to-bottom deep cleaning when you need more than a standard visit.",
+    "moreTitle": "More on the site",
+    "moreLead": "Company story, reasons clients trust us, FAQs, and contact.",
+    "houseBlurb": "Homes and recurring visits across Makkah districts.",
+    "apartmentBlurb": "Compact layouts with efficient, thorough visits.",
+    "villaBlurb": "Multi-floor homes staged for quality and speed.",
+    "acBlurb": "Filters, coils, and outdoor units when access allows.",
+    "sofaBlurb": "Fabric-safe methods for sofas, carpets, and majlis spaces.",
+    "pestBlurb": "Coordinated pest control with clear assessment first.",
+    "aboutBlurb": "Mission, vision, and how we work in Mecca.",
+    "whyBlurb": "Team training, safer products, and punctual scheduling.",
+    "faqBlurb": "Booking, coverage, products, and pricing questions.",
+    "contactBlurb": "Phone, email, WhatsApp, address, and map.",
+    "contactCta": "Go to contact"
   },
   "trustStrip": {
     "ariaListLabel": "Quick highlights about our cleaning service",
@@ -89,6 +115,7 @@
     "sectionTitle": "Services in Makkah (full pages)",
     "sectionLead": "Local SEO pages—pick a service and message us on WhatsApp.",
     "home": "Home cleaning",
+    "apartment": "Apartment cleaning",
     "villa": "Villa cleaning",
     "office": "Office cleaning",
     "deep": "Deep cleaning",
@@ -96,7 +123,8 @@
     "locShawqiyah": "Al Shawqiyah",
     "locHaram": "Near Al Haram",
     "ac": "AC cleaning",
-    "sofaCarpet": "Sofa & carpet"
+    "sofaCarpet": "Sofa & carpet",
+    "pest": "Pest control"
   },
   "about": {
     "sectionTitle": "About us",
@@ -108,6 +136,8 @@
   "services": {
     "sectionTitle": "Our services",
     "sectionLead": "Complete care for homes and workplaces — tailored plans and careful execution.",
+    "gridTitle": "Every service in one place",
+    "gridLead": "Open a page for what’s included, Makkah coverage, and how to book on WhatsApp.",
     "cardLink": "Details & book",
     "pestLink": "Contact — pest control",
     "cards": {

@@ -1,26 +1,19 @@
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
-import NavHashLink from './NavHashLink'
-import { useLanguage } from '../context/LanguageContext'
+import { Link, useLocation } from 'react-router-dom'
+import { useLanguage } from '../context/useLanguage'
 import logoArabicAvif from '../assets/logo-alamiah.avif'
 import logoArabicWebp from '../assets/logo-alamiah.webp'
 import logoEnglishAvif from '../assets/logo-english.avif'
 import logoEnglishWebp from '../assets/logo-english.webp'
-import {
-  COMPANY_PHONE_DIGITS,
-  formatPhoneDisplay,
-  PHONE_TEL_HREF,
-  WHATSAPP_HREF_AR,
-  WHATSAPP_HREF_EN,
-} from '../constants/contact'
+import { WHATSAPP_HREF_AR, WHATSAPP_HREF_EN } from '../constants/contact'
 
 const NAV_ITEMS = [
-  { key: 'nav.home', to: '/#home' },
-  { key: 'nav.about', to: '/#about' },
-  { key: 'nav.services', to: '/#services' },
-  { key: 'nav.whyUs', to: '/#why-us' },
-  { key: 'faq.sectionTitle', to: '/#faq' },
-  { key: 'nav.contact', to: '/#contact' },
+  { key: 'nav.home', to: '/' },
+  { key: 'nav.about', to: '/about' },
+  { key: 'nav.services', to: '/services' },
+  { key: 'nav.whyUs', to: '/why-us' },
+  { key: 'faq.sectionTitle', to: '/faq' },
+  { key: 'nav.contact', to: '/contact' },
 ] as const
 
 const toolbarBtn =
@@ -38,10 +31,26 @@ const whatsappToolbarClass =
 
 const navLinkClass =
   'rounded-[10px] border border-transparent px-2.5 py-2 text-sm font-medium text-(--text) ' +
-  'transition-[background,border-color,color] duration-300 ease-out ' +
+  'transition-[background,border-color,color,box-shadow] duration-300 ease-out ' +
   'hover:border-(--border) hover:bg-(--surface) hover:text-(--text-strong) lg:text-[15px]'
 
+const navLinkActiveClass =
+  ' font-semibold text-(--text-strong) border-[color-mix(in_oklab,var(--primary)_42%,var(--border))] ' +
+  'bg-[color-mix(in_oklab,var(--primary)_9%,var(--surface))] shadow-[inset_0_-2px_0_0_var(--primary)] ' +
+  'hover:border-[color-mix(in_oklab,var(--primary)_48%,var(--border))] hover:bg-[color-mix(in_oklab,var(--primary)_12%,var(--surface))] ' +
+  'hover:text-(--text-strong)'
+
+/** Match nav `to` against current pathname; `/services` includes all service detail routes. */
+function isNavItemActive(pathname: string, to: string): boolean {
+  const path = pathname.replace(/\/$/, '') || '/'
+  const target = to.replace(/\/$/, '') || '/'
+  if (target === '/') return path === '/'
+  if (target === '/services') return path === '/services' || path.startsWith('/services/')
+  return path === target
+}
+
 function Navbar() {
+  const { pathname } = useLocation()
   const { t, locale, toggleLocale } = useLanguage()
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -55,7 +64,6 @@ function Navbar() {
   const brandLogoAvif = locale === 'en' ? logoEnglishAvif : logoArabicAvif
   const brandLogoWebp = locale === 'en' ? logoEnglishWebp : logoArabicWebp
   const wa = locale === 'ar' ? WHATSAPP_HREF_AR : WHATSAPP_HREF_EN
-  const phoneDisplay = formatPhoneDisplay(COMPANY_PHONE_DIGITS)
 
   useEffect(() => {
     const onResize = () => {
@@ -77,7 +85,7 @@ function Navbar() {
   return (
     <header className="topbar-frosted fixed inset-s-0 inset-e-0 top-0 z-50">
       <nav
-        className="mx-auto flex w-full max-w-[1120px] flex-nowrap items-center gap-3 px-5 py-3.5 md:gap-4"
+        className="flex w-full max-w-none flex-nowrap items-center gap-3 px-4 py-3.5 md:gap-4 md:px-6 lg:px-10 xl:px-16"
         aria-label={t('nav.ariaMain')}
       >
         <Link
@@ -109,13 +117,20 @@ function Navbar() {
         </Link>
 
         <ul className="hidden min-w-0 flex-1 flex-wrap items-center justify-center gap-1 md:flex">
-          {navLinks.map(({ label, to }) => (
-            <li key={to}>
-              <NavHashLink to={to} className={navLinkClass}>
-                {label}
-              </NavHashLink>
-            </li>
-          ))}
+          {navLinks.map(({ label, to }) => {
+            const active = isNavItemActive(pathname, to)
+            return (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className={`${navLinkClass}${active ? navLinkActiveClass : ''}`}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {label}
+                </Link>
+              </li>
+            )
+          })}
         </ul>
 
         <div className="ms-auto flex shrink-0 items-center gap-2 md:ms-0 md:gap-2.5">
@@ -135,16 +150,6 @@ function Navbar() {
                 : t('language.labelArabic')}
             </span>
           </button>
-
-          <a
-            href={PHONE_TEL_HREF}
-            className={`${toolbarBtn} hidden min-h-[44px] px-3 text-[13px] sm:inline-flex md:px-4 md:text-[14px]`}
-            aria-label={`${t('nav.phoneToolbar')}: ${phoneDisplay}`}
-          >
-            <span dir="ltr" className="font-bold tabular-nums">
-              {phoneDisplay}
-            </span>
-          </a>
 
           <a
             href={wa}
@@ -185,7 +190,7 @@ function Navbar() {
         aria-hidden={!menuOpen}
         className={`border-t border-(--border) bg-white/95 backdrop-blur-md md:hidden ${menuOpen ? 'max-h-128 opacity-100' : 'pointer-events-none max-h-0 overflow-hidden opacity-0'} transition-all duration-300 ease-out`}
       >
-        <ul className="flex flex-col gap-1 px-4 py-4">
+        <ul className="flex flex-col gap-1 px-4 py-4 md:px-6 lg:px-10 xl:px-16">
           <li>
             <button
               type="button"
@@ -200,26 +205,21 @@ function Navbar() {
                 : t('language.labelArabic')}
             </button>
           </li>
-          {navLinks.map(({ label, to }) => (
-            <li key={to}>
-              <NavHashLink
-                to={to}
-                className={`${navLinkClass} block w-full px-3 py-3 text-base`}
-                onClick={closeMenu}
-              >
-                {label}
-              </NavHashLink>
-            </li>
-          ))}
-          <li>
-            <a
-              href={PHONE_TEL_HREF}
-              className={`${toolbarBtn} block w-full px-3 py-3 text-base font-bold`}
-              onClick={closeMenu}
-            >
-              <span dir="ltr">{phoneDisplay}</span>
-            </a>
-          </li>
+          {navLinks.map(({ label, to }) => {
+            const active = isNavItemActive(pathname, to)
+            return (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className={`${navLinkClass} block w-full px-3 py-3 text-base${active ? navLinkActiveClass : ''}`}
+                  aria-current={active ? 'page' : undefined}
+                  onClick={closeMenu}
+                >
+                  {label}
+                </Link>
+              </li>
+            )
+          })}
           <li className="pt-1">
             <a
               href={wa}

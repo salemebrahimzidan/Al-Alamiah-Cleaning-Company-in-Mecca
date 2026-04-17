@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { useMemo } from 'react'
-import { useLanguage } from '../context/LanguageContext'
+import { useLanguage } from '../context/useLanguage'
 import ar from '../locales/ar.json'
 import en from '../locales/en.json'
 import { COMPANY_EMAIL, COMPANY_PHONE_DIGITS } from '../constants/contact'
@@ -8,12 +8,9 @@ import { absoluteAppUrl, getSiteOrigin } from '../constants/site'
 
 const messages = { ar, en }
 
-type FaqItem = { q: string; a: string }
-
 function buildGraph(
   homeUrl: string,
   locale: 'ar' | 'en',
-  faqItems: FaqItem[],
   businessImageUrl: string,
   businessDescription: string,
   knowsAbout: string[],
@@ -88,18 +85,6 @@ function buildGraph(
         publisher: { '@id': `${homeUrl}#business` },
         inLanguage: ['ar', 'en'],
       },
-      {
-        '@type': 'FAQPage',
-        '@id': `${homeUrl}#faq`,
-        mainEntity: faqItems.map((item) => ({
-          '@type': 'Question',
-          name: item.q,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.a,
-          },
-        })),
-      },
     ],
   }
 }
@@ -112,11 +97,10 @@ export default function SeoJsonLd() {
     if (!origin) return ''
     const homeUrl = absoluteAppUrl()
     const m = messages[locale]
-    const faqItems = m.faq.items as FaqItem[]
     const businessImageUrl = absoluteAppUrl('og-image.webp')
     const knowsAbout = m.seo.knowsAbout as string[]
     return JSON.stringify(
-      buildGraph(homeUrl, locale, faqItems, businessImageUrl, m.seo.metaDescription, knowsAbout),
+      buildGraph(homeUrl, locale, businessImageUrl, m.seo.metaDescription, knowsAbout),
     )
   }, [locale])
 

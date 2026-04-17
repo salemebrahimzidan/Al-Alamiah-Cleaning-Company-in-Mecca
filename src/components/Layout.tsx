@@ -7,24 +7,17 @@ import {
   WHATSAPP_HREF_AR,
   WHATSAPP_HREF_EN,
 } from '../constants/contact'
-import { useLanguage } from '../context/LanguageContext'
+import { useLanguage } from '../context/useLanguage'
 
 export default function Layout() {
   const { t, locale } = useLanguage()
   const wa = locale === 'ar' ? WHATSAPP_HREF_AR : WHATSAPP_HREF_EN
   const location = useLocation()
 
-  /** After navigating from another route to `/#section`, scroll to the target id. */
+  /** Scroll to top on route change for predictable multi-page navigation. */
   useLayoutEffect(() => {
-    if (location.pathname !== '/') return
-    const id = location.hash.replace(/^#/, '')
-    if (!id) return
-    const el = document.getElementById(id)
-    if (!el) return
-    requestAnimationFrame(() => {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    })
-  }, [location.pathname, location.hash])
+    window.scrollTo(0, 0)
+  }, [location.pathname])
 
   return (
     <>

@@ -1,117 +1,111 @@
-import { lazy, Suspense } from 'react'
-import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { IconPest, IconSteam, IconZap } from "../components/HomeIcons";
+import SeoJsonLd from "../components/SeoJsonLd";
 import {
-  IconClock,
-  IconLeaf,
-  IconPest,
-  IconSparkle,
-  IconSteam,
-  IconTeam,
-  IconZap,
-} from '../components/HomeIcons'
-import {
-  IconLocation,
-  IconMail,
-  IconPhone,
-  IconWhatsApp,
-} from '../components/ContactIcons'
-import SeoJsonLd from '../components/SeoJsonLd'
-import {
-  COMPANY_EMAIL,
-  COMPANY_PHONE_DIGITS,
-  formatPhoneDisplay,
   PHONE_TEL_HREF,
   WHATSAPP_HREF_AR,
   WHATSAPP_HREF_EN,
-} from '../constants/contact'
-import { absoluteAppUrl, getSiteOrigin } from '../constants/site'
-import { useLanguage } from '../context/LanguageContext'
-import ar from '../locales/ar.json'
-import en from '../locales/en.json'
-import '../App.css'
+} from "../constants/contact";
+import {
+  HOMEPAGE_FEATURED_SERVICE_SLUGS,
+  SERVICE_CARD_SUMMARIES,
+} from "../constants/serviceSummaries";
+import { serviceLink } from "../constants/serviceRoutes";
+import { absoluteAppUrl } from "../constants/site";
+import { useLanguage } from "../context/useLanguage";
+import "../App.css";
 
-const OpenStreetMapEmbed = lazy(() => import('../components/OpenStreetMapEmbed'))
+const TRUST_STAT_KEYS = ["a", "b", "c", "d"] as const;
 
-const SERVICE_KEYS = ['steam', 'pest', 'deep', 'quick'] as const
-const WHY_KEYS = ['team', 'eco', 'punctual'] as const
+const HERO_HIGHLIGHTS = [
+  {
+    key: "steam" as const,
+    msgKey: "hero.highlightSteam" as const,
+    Icon: IconSteam,
+    iconWrap: "border-sky-200 bg-sky-50 text-sky-600",
+  },
+  {
+    key: "pest" as const,
+    msgKey: "hero.highlightPest" as const,
+    Icon: IconPest,
+    iconWrap: "border-emerald-200 bg-emerald-50 text-emerald-600",
+  },
+  {
+    key: "fast" as const,
+    msgKey: "hero.highlightFast" as const,
+    Icon: IconZap,
+    iconWrap: "border-amber-200 bg-amber-50 text-amber-600",
+  },
+] as const;
 
-const SERVICE_DETAIL_PATH: Record<(typeof SERVICE_KEYS)[number], string> = {
-  steam: '/services/sofa-carpet-cleaning-makkah',
-  pest: '/#contact',
-  deep: '/services/deep-cleaning-makkah',
-  quick: '/services/home-cleaning-makkah',
-}
+const HOMEPAGE_FEATURED_SERVICES = HOMEPAGE_FEATURED_SERVICE_SLUGS.map(
+  (slug) => {
+    const row = SERVICE_CARD_SUMMARIES.find((c) => c.slug === slug);
+    if (!row) throw new Error(`Missing service summary for ${slug}`);
+    return row;
+  },
+);
 
-const SERVICE_HUB = [
-  { to: '/services/home-cleaning-makkah', key: 'servicePages.home' as const },
-  { to: '/services/villa-cleaning-makkah', key: 'servicePages.villa' as const },
-  { to: '/services/office-cleaning-makkah', key: 'servicePages.office' as const },
-  { to: '/services/deep-cleaning-makkah', key: 'servicePages.deep' as const },
-  { to: '/services/ac-cleaning-makkah', key: 'servicePages.ac' as const },
-  { to: '/services/sofa-carpet-cleaning-makkah', key: 'servicePages.sofaCarpet' as const },
-  { to: '/locations/al-aziziyah-makkah', key: 'servicePages.locAziziyah' as const },
-  { to: '/locations/al-shawqiyah-makkah', key: 'servicePages.locShawqiyah' as const },
-  { to: '/locations/near-al-haram-makkah', key: 'servicePages.locHaram' as const },
-]
-
-const messages = { ar, en }
-
-const TRUST_STAT_KEYS = ['a', 'b', 'c', 'd'] as const
-
-const serviceIcons = {
-  steam: IconSteam,
-  pest: IconPest,
-  deep: IconSparkle,
-  quick: IconZap,
-} as const
-
-const whyIcons = {
-  team: IconTeam,
-  eco: IconLeaf,
-  punctual: IconClock,
-} as const
+const SITE_PREVIEW_LINKS = [
+  {
+    to: "/about",
+    titleKey: "about.sectionTitle" as const,
+    blurbKey: "homePreview.aboutBlurb" as const,
+  },
+  {
+    to: "/why-us",
+    titleKey: "whyUs.sectionTitle" as const,
+    blurbKey: "homePreview.whyBlurb" as const,
+  },
+  {
+    to: "/faq",
+    titleKey: "faq.sectionTitle" as const,
+    blurbKey: "homePreview.faqBlurb" as const,
+  },
+  {
+    to: "/contact",
+    titleKey: "contact.sectionTitle" as const,
+    blurbKey: "homePreview.contactBlurb" as const,
+  },
+] as const;
 
 export default function HomePage() {
-  const { t, locale } = useLanguage()
-  const phoneDisplay = formatPhoneDisplay(COMPANY_PHONE_DIGITS)
-  const wa = locale === 'ar' ? WHATSAPP_HREF_AR : WHATSAPP_HREF_EN
-  const canonical = absoluteAppUrl()
-  const ogImage = absoluteAppUrl('og-image.webp')
-  const faqItems = messages[locale].faq.items
-  const siteOrigin = getSiteOrigin()
-  const heroAvif = `${import.meta.env.BASE_URL}hero-lcp.avif`
-  const heroWebp = `${import.meta.env.BASE_URL}hero-lcp.webp`
-  const lcpPreloadHref = siteOrigin ? absoluteAppUrl('hero-lcp.avif') : ''
+  const { t, locale } = useLanguage();
+  const wa = locale === "ar" ? WHATSAPP_HREF_AR : WHATSAPP_HREF_EN;
+  const canonical = absoluteAppUrl();
+  const ogImage = absoluteAppUrl("og-image.webp");
 
   return (
     <>
       <Helmet>
-        <title>{t('pageTitle')}</title>
-        <meta name="description" content={t('seo.metaDescription')} />
+        <title>{t("pageTitle")}</title>
+        <meta name="description" content={t("seo.metaDescription")} />
         {canonical ? <link rel="canonical" href={canonical} /> : null}
-        {lcpPreloadHref ? (
-          <link rel="preload" href={lcpPreloadHref} as="image" type="image/avif" />
-        ) : null}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={t('pageTitle')} />
-        <meta property="og:description" content={t('seo.metaDescription')} />
+        <meta property="og:title" content={t("pageTitle")} />
+        <meta property="og:description" content={t("seo.metaDescription")} />
         {canonical ? <meta property="og:url" content={canonical} /> : null}
-        <meta property="og:locale" content={t('seo.ogLocale')} />
+        <meta property="og:locale" content={t("seo.ogLocale")} />
         {ogImage ? <meta property="og:image" content={ogImage} /> : null}
         {ogImage ? <meta property="og:image:width" content="1200" /> : null}
         {ogImage ? <meta property="og:image:height" content="630" /> : null}
-        {ogImage ? <meta property="og:image:type" content="image/webp" /> : null}
-        {ogImage ? <meta property="og:image:alt" content={t('seo.ogImageAlt')} /> : null}
+        {ogImage ? (
+          <meta property="og:image:type" content="image/webp" />
+        ) : null}
+        {ogImage ? (
+          <meta property="og:image:alt" content={t("seo.ogImageAlt")} />
+        ) : null}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={t('pageTitle')} />
-        <meta name="twitter:description" content={t('seo.metaDescription')} />
+        <meta name="twitter:title" content={t("pageTitle")} />
+        <meta name="twitter:description" content={t("seo.metaDescription")} />
         {ogImage ? <meta name="twitter:image" content={ogImage} /> : null}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
         {canonical ? (
           <>
-            <link rel="alternate" hrefLang="ar-SA" href={canonical} />
-            <link rel="alternate" hrefLang="en-SA" href={canonical} />
             <link rel="alternate" hrefLang="x-default" href={canonical} />
           </>
         ) : null}
@@ -119,364 +113,217 @@ export default function HomePage() {
       <SeoJsonLd />
 
       <main className="site-main">
-        <section id="home" className="page-hero scroll-mt-20" aria-labelledby="hero-heading">
-          <div className="page-hero__bg" aria-hidden />
-          <div className="page-hero__lcp" aria-hidden>
-            <picture>
-              <source srcSet={heroAvif} type="image/avif" />
-              <img
-                src={heroWebp}
-                alt=""
-                width={1600}
-                height={900}
-                decoding="async"
-                fetchPriority="high"
+        <section
+          id="home"
+          className="relative scroll-mt-20 overflow-hidden bg-linear-to-b from-sky-50/70 via-white to-gray-50/40"
+          aria-labelledby="hero-heading"
+        >
+          <div
+            className="pointer-events-none absolute -inset-s-24 -top-24 size-[min(26rem,88vw)] rounded-full bg-sky-200/35 blur-3xl"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -inset-e-16 top-1/4 size-[min(20rem,65vw)] rounded-full bg-emerald-200/30 blur-3xl"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 h-[42%] bg-[radial-gradient(ellipse_80%_55%_at_50%_-18%,rgb(14_165_233/0.12),transparent)]"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-sky-200/50 to-transparent"
+            aria-hidden
+          />
+
+          <div className="relative z-10 mx-auto w-full max-w-336 px-4 py-6 md:px-6 md:py-8 lg:px-10 lg:py-9 xl:px-16">
+            <div className="relative overflow-hidden rounded-3xl border border-gray-200/80 bg-white/75 p-5 shadow-sm shadow-gray-200/40 ring-1 ring-gray-100/80 backdrop-blur-md md:p-6 lg:p-8">
+              <div
+                className="pointer-events-none absolute inset-0 opacity-[0.35]"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2394a3b8' fill-opacity='0.09'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                }}
+                aria-hidden
               />
-            </picture>
-          </div>
-          <div className="container page-hero__content">
-            <p className="page-hero__kicker">{t('hero.kicker')}</p>
-            <h1 id="hero-heading" className="page-hero__headline">
-              {t('hero.headline')}
-            </h1>
-            <p className="page-hero__subbrand">{t('hero.subheadBrand')}</p>
-            <p className="page-hero__tagline">{t('hero.tagline')}</p>
 
-            <ul className="trust-strip" aria-label={t('trustStrip.ariaListLabel')}>
-              <li>{t('trustStrip.a')}</li>
-              <li>{t('trustStrip.b')}</li>
-              <li>{t('trustStrip.c')}</li>
-              <li>{t('trustStrip.d')}</li>
-            </ul>
+              <div className="relative grid items-start gap-6 sm:gap-7 lg:grid-cols-2 lg:gap-8 xl:gap-10">
+                <div className="space-y-4 text-center lg:text-start">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-sky-600">
+                    {t("hero.kicker")}
+                  </p>
 
-            <ul className="trust-stats" aria-label={t('trustStats.aria')}>
-              {TRUST_STAT_KEYS.map((k) => (
-                <li key={k} className="trust-stat">
-                  <strong className="trust-stat__label">{t(`trustStats.${k}Label`)}</strong>
-                  <span className="trust-stat__hint">{t(`trustStats.${k}Hint`)}</span>
-                </li>
-              ))}
-            </ul>
+                  <h1
+                    id="hero-heading"
+                    className="text-balance text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-[2.125rem] md:leading-tight lg:text-4xl xl:text-5xl"
+                  >
+                    {t("hero.headline")}
+                  </h1>
 
-            <div className="page-hero__highlights">
-              <div className="hero-pill hero-pill--steam">
-                <span className="hero-pill__icon-wrap" aria-hidden>
-                  <IconSteam className="hero-pill__svg" />
-                </span>
-                <span className="hero-pill__label">{t('hero.highlightSteam')}</span>
+                  <p className="text-base font-bold text-sky-600 md:text-lg">
+                    {t("hero.subheadBrand")}
+                  </p>
+
+                  <p className="mx-auto max-w-xl text-sm leading-relaxed text-gray-600 md:text-base lg:mx-0">
+                    {t("hero.tagline")}
+                  </p>
+
+                  <ul
+                    className="flex flex-wrap justify-center gap-2 lg:justify-start"
+                    aria-label={t("trustStrip.ariaListLabel")}
+                  >
+                    {TRUST_STAT_KEYS.map((k) => (
+                      <li
+                        key={k}
+                        className="rounded-full border border-gray-200/90 bg-gray-50/90 px-3 py-1 text-xs font-semibold text-gray-800"
+                      >
+                        {t(`trustStrip.${k}`)}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="flex flex-col gap-2 pt-1 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-3 lg:justify-start">
+                    <a
+                      className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-linear-to-br from-emerald-500 to-teal-600 px-5 text-sm font-bold text-white shadow-md shadow-emerald-500/20 transition hover:shadow-lg hover:shadow-emerald-500/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 sm:min-h-11 sm:w-auto sm:px-6 sm:text-sm md:text-base"
+                      href={wa}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={t("contact.ariaBookWhatsapp")}
+                    >
+                      {t("hero.ctaBook")}
+                    </a>
+                    <a
+                      className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-sky-200 bg-white px-5 text-sm font-bold text-sky-700 shadow-sm transition hover:border-sky-300 hover:bg-sky-50/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 sm:min-h-11 sm:w-auto sm:px-6 sm:text-sm md:text-base"
+                      href={PHONE_TEL_HREF}
+                      aria-label={t("contact.ariaPhone")}
+                    >
+                      {t("hero.ctaCall")}
+                    </a>
+                    <Link
+                      className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-gray-300 bg-transparent px-5 text-sm font-bold text-gray-800 transition hover:bg-gray-50/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 sm:min-h-11 sm:w-auto sm:px-6 sm:text-sm md:text-base"
+                      to="/contact"
+                    >
+                      {t("hero.ctaContact")}
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="flex min-h-0 flex-col rounded-2xl border border-gray-200/70 bg-gray-50/40 p-4 md:p-5">
+                  <h2
+                    id="hero-mosaic-heading"
+                    className="mb-3 text-center text-xs font-bold uppercase tracking-[0.12em] text-gray-500 lg:mb-4 lg:text-start"
+                  >
+                    {t("hero.mosaicHeading")}
+                  </h2>
+                  <ul
+                    className="m-0 grid flex-1 list-none auto-rows-fr grid-cols-2 gap-4 p-0 lg:grid-cols-3"
+                    aria-labelledby="hero-mosaic-heading"
+                  >
+                    {TRUST_STAT_KEYS.map((k) => (
+                      <li
+                        key={k}
+                        className="flex min-h-24 flex-col items-center justify-center gap-1 rounded-xl border border-gray-200/90 bg-white p-3 text-center shadow-sm"
+                      >
+                        <strong className="text-sm font-bold leading-snug text-gray-900">
+                          {t(`trustStats.${k}Label`)}
+                        </strong>
+                        <span className="text-xs font-medium leading-snug text-gray-500">
+                          {t(`trustStats.${k}Hint`)}
+                        </span>
+                      </li>
+                    ))}
+                    {HERO_HIGHLIGHTS.map(({ key, msgKey, Icon, iconWrap }) => (
+                      <li
+                        key={key}
+                        className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-xl border border-gray-200/90 bg-white p-3 text-center shadow-sm"
+                      >
+                        <span
+                          className={`flex size-9 shrink-0 items-center justify-center rounded-full border md:size-10 ${iconWrap}`}
+                          aria-hidden
+                        >
+                          <Icon className="size-4.5 md:size-5" />
+                        </span>
+                        <span className="text-xs font-semibold leading-snug text-gray-900 md:text-sm">
+                          {t(msgKey)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="hero-pill hero-pill--pest">
-                <span className="hero-pill__icon-wrap" aria-hidden>
-                  <IconPest className="hero-pill__svg" />
-                </span>
-                <span className="hero-pill__label">{t('hero.highlightPest')}</span>
-              </div>
-              <div className="hero-pill hero-pill--fast">
-                <span className="hero-pill__icon-wrap" aria-hidden>
-                  <IconZap className="hero-pill__svg" />
-                </span>
-                <span className="hero-pill__label">{t('hero.highlightFast')}</span>
-              </div>
-            </div>
-
-            <div className="page-hero__cta page-hero__cta--triple">
-              <a
-                className="btn btn--primary"
-                href={wa}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t('contact.ariaBookWhatsapp')}
-              >
-                {t('hero.ctaBook')}
-              </a>
-              <a className="btn btn--call" href={PHONE_TEL_HREF} aria-label={t('contact.ariaPhone')}>
-                {t('hero.ctaCall')}
-              </a>
-              <a className="btn btn--secondary" href="#contact">
-                {t('hero.ctaContact')}
-              </a>
             </div>
           </div>
         </section>
 
         <section
-          id="makkah-services"
           className="section section--alt scroll-mt-20"
-          aria-labelledby="local-makkah-heading"
+          aria-labelledby="preview-services-heading"
         >
           <div className="container">
-            <h2 id="local-makkah-heading" className="section__title">
-              {t('localMakkah.sectionTitle')}
-            </h2>
-            <p className="section__lead">{t('localMakkah.sectionLead')}</p>
-            <div className="local-seo-block">
-              <p>{t('localMakkah.intro')}</p>
+            <header className="section__intro">
+              <h2 id="preview-services-heading" className="section__title">
+                {t("homePreview.servicesTitle")}
+              </h2>
+              <p className="section__lead">{t("homePreview.servicesTeaser")}</p>
+            </header>
 
-              <h3>{t('localMakkah.hHomes')}</h3>
-              <p>{t('localMakkah.pHomes')}</p>
-              <p>
-                <Link className="local-seo-block__link" to="/services/home-cleaning-makkah">
-                  {t('localMakkah.linkHomes')} →
-                </Link>
-              </p>
-
-              <h3>{t('localMakkah.hVillas')}</h3>
-              <p>{t('localMakkah.pVillas')}</p>
-              <p>
-                <Link className="local-seo-block__link" to="/services/villa-cleaning-makkah">
-                  {t('localMakkah.linkVillas')} →
-                </Link>
-              </p>
-
-              <h3>{t('localMakkah.hAc')}</h3>
-              <p>{t('localMakkah.pAc')}</p>
-              <p>
-                <Link className="local-seo-block__link" to="/services/ac-cleaning-makkah">
-                  {t('localMakkah.linkAc')} →
-                </Link>
-              </p>
-
-              <h3>{t('localMakkah.hUpholstery')}</h3>
-              <p>{t('localMakkah.pUpholstery')}</p>
-              <p>
-                <Link className="local-seo-block__link" to="/services/sofa-carpet-cleaning-makkah">
-                  {t('localMakkah.linkUpholstery')} →
-                </Link>
-              </p>
-
-              <p className="local-seo-block__cta">{t('localMakkah.ctaNote')}</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="about" className="section scroll-mt-20" aria-labelledby="about-heading">
-          <div className="container">
-            <h2 id="about-heading" className="section__title">
-              {t('about.sectionTitle')}
-            </h2>
-            <div className="about-grid">
-              <article className="info-card info-card--mission">
-                <h3 className="info-card__title">{t('about.missionTitle')}</h3>
-                <p className="info-card__body">{t('about.missionBody')}</p>
-              </article>
-              <article className="info-card info-card--vision">
-                <h3 className="info-card__title">{t('about.visionTitle')}</h3>
-                <p className="info-card__body">{t('about.visionBody')}</p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section id="services" className="section section--alt scroll-mt-20" aria-labelledby="services-heading">
-          <div className="container">
-            <h2 id="services-heading" className="section__title">
-              {t('services.sectionTitle')}
-            </h2>
-            <p className="section__lead">{t('services.sectionLead')}</p>
-            <div className="services-grid">
-              {SERVICE_KEYS.map((key) => {
-                const Icon = serviceIcons[key]
-                const detail = SERVICE_DETAIL_PATH[key]
-                const isHash = detail.startsWith('/#')
-                const inner = (
-                  <>
-                    <div className="service-card__icon" aria-hidden>
-                      <Icon className="h-9 w-9" />
-                    </div>
-                    <h3 className="service-card__title">{t(`services.cards.${key}.title`)}</h3>
-                    <p className="service-card__desc">{t(`services.cards.${key}.desc`)}</p>
-                    {isHash ? (
-                      <a className="service-card__link" href={detail}>
-                        {t('services.pestLink')}
-                      </a>
-                    ) : (
-                      <Link className="service-card__link" to={detail}>
-                        {t('services.cardLink')} →
-                      </Link>
-                    )}
-                  </>
-                )
-                return (
-                  <article key={key} className="service-card">
-                    {inner}
-                  </article>
-                )
-              })}
-            </div>
-
-            <h3 id="service-pages-heading" className="section__title section__title--sub">
-              {t('servicePages.sectionTitle')}
-            </h3>
-            <p className="section__lead">{t('servicePages.sectionLead')}</p>
-            <nav
-              className="service-hub"
-              aria-labelledby="service-pages-heading"
-            >
-              {SERVICE_HUB.map(({ to, key }) => (
-                <Link key={to} className="service-hub__link" to={to}>
-                  {t(key)}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        </section>
-
-        <section id="why-us" className="section scroll-mt-20" aria-labelledby="why-heading">
-          <div className="container">
-            <h2 id="why-heading" className="section__title">
-              {t('whyUs.sectionTitle')}
-            </h2>
-            <p className="section__lead">{t('whyUs.sectionLead')}</p>
-            <div className="features-grid">
-              {WHY_KEYS.map((key) => {
-                const Icon = whyIcons[key]
-                return (
-                  <article key={key} className="feature-card">
-                    <div className="feature-card__icon" aria-hidden>
-                      <Icon className="h-8 w-8" />
-                    </div>
-                    <h3 className="feature-card__title">{t(`whyUs.${key}.title`)}</h3>
-                    <p className="feature-card__desc">{t(`whyUs.${key}.desc`)}</p>
-                  </article>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section id="faq" className="section section--alt scroll-mt-20" aria-labelledby="faq-heading">
-          <div className="container">
-            <h2 id="faq-heading" className="section__title">
-              {t('faq.sectionTitle')}
-            </h2>
-            <p className="section__lead">{t('faq.sectionLead')}</p>
-            <div className="faq-list">
-              {faqItems.map((item, i) => (
-                <details key={i} className="faq-item" name="faq">
-                  <summary className="faq-item__q">{item.q}</summary>
-                  <p className="faq-item__a">{item.a}</p>
-                </details>
-              ))}
-            </div>
-            <div className="faq-cta">
-              <a
-                className="btn btn--primary"
-                href={wa}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t('contact.ariaBookWhatsapp')}
-              >
-                {t('hero.ctaBook')}
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="section section--contact scroll-mt-20" aria-labelledby="contact-heading">
-          <div className="container">
-            <h2 id="contact-heading" className="section__title">
-              {t('contact.sectionTitle')}
-            </h2>
-            <p className="section__lead">{t('contact.sectionLead')}</p>
-
-            <div className="contact-layout">
-              <div className="contact-cards">
-                <a
-                  className="contact-card"
-                  href={PHONE_TEL_HREF}
-                  aria-label={t('contact.ariaPhone')}
-                >
-                  <span className="contact-card__row">
-                    <span
-                      className="contact-card__icon-wrap contact-card__icon-wrap--phone"
-                      aria-hidden
-                    >
-                      <IconPhone className="contact-card__icon-svg" />
-                    </span>
-                    <span className="contact-card__body">
-                      <span className="contact-card__label">{t('contact.phoneCard')}</span>
-                      <span className="contact-card__value contact-card__value--ltr" dir="ltr">
-                        {phoneDisplay}
-                      </span>
-                    </span>
-                  </span>
-                </a>
-                <a
-                  className="contact-card"
-                  href={`mailto:${COMPANY_EMAIL}`}
-                  aria-label={t('contact.ariaEmail')}
-                >
-                  <span className="contact-card__row">
-                    <span
-                      className="contact-card__icon-wrap contact-card__icon-wrap--mail"
-                      aria-hidden
-                    >
-                      <IconMail className="contact-card__icon-svg" />
-                    </span>
-                    <span className="contact-card__body">
-                      <span className="contact-card__label">{t('contact.emailCard')}</span>
-                      <span className="contact-card__value contact-card__value--ltr" dir="ltr">
-                        {COMPANY_EMAIL}
-                      </span>
-                    </span>
-                  </span>
-                </a>
-                <a
-                  className="contact-card contact-card--accent"
-                  href={wa}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={t('contact.ariaWhatsapp')}
-                >
-                  <span className="contact-card__row">
-                    <span
-                      className="contact-card__icon-wrap contact-card__icon-wrap--wa"
-                      aria-hidden
-                    >
-                      <IconWhatsApp className="contact-card__icon-svg" />
-                    </span>
-                    <span className="contact-card__body">
-                      <span className="contact-card__label">{t('contact.whatsappCard')}</span>
-                      <span className="contact-card__value">{t('contact.whatsappCtaLine')}</span>
-                    </span>
-                  </span>
-                </a>
-                <div className="contact-card contact-card--static">
-                  <span className="contact-card__row">
-                    <span
-                      className="contact-card__icon-wrap contact-card__icon-wrap--loc"
-                      aria-hidden
-                    >
-                      <IconLocation className="contact-card__icon-svg" />
-                    </span>
-                    <span className="contact-card__body">
-                      <span className="contact-card__label">{t('contact.addressTitle')}</span>
-                      <span className="contact-card__value">{t('contact.addressBody')}</span>
-                    </span>
-                  </span>
-                </div>
-              </div>
-
-              <div className="contact-aside">
-                <div className="map-embed" role="region" aria-label={t('contact.mapTitle')}>
-                  <Suspense
-                    fallback={
-                      <div
-                        className="map-embed__frame map-embed--pending"
-                        role="status"
-                        aria-live="polite"
-                        aria-label={t('contact.mapLoading')}
-                      />
-                    }
+            <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+              {HOMEPAGE_FEATURED_SERVICES.map(
+                ({ slug, titleKey, blurbKey }) => (
+                  <article
+                    key={slug}
+                    className="flex flex-col rounded-2xl border border-gray-200/90 bg-white p-5 text-center shadow-sm"
                   >
-                    <OpenStreetMapEmbed />
-                  </Suspense>
-                </div>
-              </div>
+                    <h3 className="text-base font-bold text-gray-900">
+                      {t(titleKey)}
+                    </h3>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-gray-600">
+                      {t(blurbKey)}
+                    </p>
+                    <Link
+                      className="mt-4 inline-flex justify-center text-sm font-bold text-sky-600 no-underline underline-offset-4 hover:underline"
+                      to={serviceLink(slug)}
+                    >
+                      {t("common.viewService")} →
+                    </Link>
+                  </article>
+                ),
+              )}
+            </div>
+
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+              <Link className="btn btn--primary" to="/services">
+                {t("common.allServices")}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="section section--alt scroll-mt-20"
+          aria-labelledby="preview-site-heading"
+        >
+          <div className="container">
+            <header className="section__intro">
+              <h2 id="preview-site-heading" className="section__title">
+                {t("homePreview.moreTitle")}
+              </h2>
+              <p className="section__lead">{t("homePreview.moreLead")}</p>
+            </header>
+            <div className="features-grid">
+              {SITE_PREVIEW_LINKS.map(({ to, titleKey, blurbKey }) => (
+                <article key={to} className="feature-card">
+                  <h3 className="feature-card__title">{t(titleKey)}</h3>
+                  <p className="feature-card__desc">{t(blurbKey)}</p>
+                  <Link className="service-card__link" to={to}>
+                    {to === "/contact"
+                      ? t("homePreview.contactCta")
+                      : `${t("common.learnMore")} →`}
+                  </Link>
+                </article>
+              ))}
             </div>
           </div>
         </section>
       </main>
     </>
-  )
+  );
 }
