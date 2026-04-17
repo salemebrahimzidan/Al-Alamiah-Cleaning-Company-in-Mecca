@@ -1,22 +1,14 @@
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
-import NavHashLink from './NavHashLink'
-import { useLanguage } from '../context/LanguageContext'
+import {
+  LOCATION_LINKS,
+  MORE_SERVICE_LINKS,
+  PRIMARY_SERVICE_LINKS,
+  serviceLink,
+} from '../constants/serviceRoutes'
+import { useLanguage } from '../context/useLanguage'
 
-const SERVICE_PATHS = [
-  { to: '/services/home-cleaning-makkah', key: 'servicePages.home' as const },
-  { to: '/services/villa-cleaning-makkah', key: 'servicePages.villa' as const },
-  { to: '/services/office-cleaning-makkah', key: 'servicePages.office' as const },
-  { to: '/services/deep-cleaning-makkah', key: 'servicePages.deep' as const },
-  { to: '/services/ac-cleaning-makkah', key: 'servicePages.ac' as const },
-  { to: '/services/sofa-carpet-cleaning-makkah', key: 'servicePages.sofaCarpet' as const },
-]
-
-const LOCATION_PATHS = [
-  { to: '/locations/al-aziziyah-makkah', key: 'servicePages.locAziziyah' as const },
-  { to: '/locations/al-shawqiyah-makkah', key: 'servicePages.locShawqiyah' as const },
-  { to: '/locations/near-al-haram-makkah', key: 'servicePages.locHaram' as const },
-]
+const FOOTER_SERVICE_LINKS = [...PRIMARY_SERVICE_LINKS, ...MORE_SERVICE_LINKS]
 
 function SiteFooter() {
   const { t } = useLanguage()
@@ -31,9 +23,9 @@ function SiteFooter() {
             {t('footer.servicesTitle')}
           </p>
           <nav className="site-footer__column-links" aria-label={t('footer.servicesTitle')}>
-            {SERVICE_PATHS.map(({ to, key }) => (
-              <Link key={to} to={to}>
-                {t(key)}
+            {FOOTER_SERVICE_LINKS.map(({ slug, titleKey }) => (
+              <Link key={slug} to={serviceLink(slug)}>
+                {t(titleKey)}
               </Link>
             ))}
           </nav>
@@ -41,20 +33,20 @@ function SiteFooter() {
             {t('footer.locationsTitle')}
           </p>
           <nav className="site-footer__column-links" aria-label={t('footer.locationsTitle')}>
-            {LOCATION_PATHS.map(({ to, key }) => (
+            {LOCATION_LINKS.map(({ to, titleKey }) => (
               <Link key={to} to={to}>
-                {t(key)}
+                {t(titleKey)}
               </Link>
             ))}
           </nav>
         </div>
         <nav className="site-footer__nav" aria-label={t('footer.quickLinks')}>
           <Link to="/">{t('nav.home')}</Link>
-          <NavHashLink to="/#services">{t('nav.services')}</NavHashLink>
-          <NavHashLink to="/#about">{t('nav.about')}</NavHashLink>
-          <NavHashLink to="/#why-us">{t('nav.whyUs')}</NavHashLink>
-          <NavHashLink to="/#faq">{t('faq.sectionTitle')}</NavHashLink>
-          <NavHashLink to="/#contact">{t('nav.contact')}</NavHashLink>
+          <Link to="/services">{t('nav.services')}</Link>
+          <Link to="/about">{t('nav.about')}</Link>
+          <Link to="/why-us">{t('nav.whyUs')}</Link>
+          <Link to="/faq">{t('faq.sectionTitle')}</Link>
+          <Link to="/contact">{t('nav.contact')}</Link>
         </nav>
         <p className="site-footer__copy">
           © {new Date().getFullYear()} {t('nav.brandName')}. {t('footer.rights')}
