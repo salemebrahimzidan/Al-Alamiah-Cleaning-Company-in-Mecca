@@ -3,11 +3,6 @@ import { Link } from "react-router-dom";
 import { IconPest, IconSteam, IconZap } from "../components/HomeIcons";
 import SeoJsonLd from "../components/SeoJsonLd";
 import {
-  PHONE_TEL_HREF,
-  WHATSAPP_HREF_AR,
-  WHATSAPP_HREF_EN,
-} from "../constants/contact";
-import {
   HOMEPAGE_FEATURED_SERVICE_SLUGS,
   SERVICE_CARD_SUMMARIES,
 } from "../constants/serviceSummaries";
@@ -70,21 +65,83 @@ const SITE_PREVIEW_LINKS = [
   },
 ] as const;
 
+const HOMEPAGE_TRUST_FACTS = {
+  ar: [
+    "أكثر من 1000 عميل راضٍ",
+    "خبرة أكثر من 5 سنوات",
+    "خدمة سريعة خلال 24 ساعة",
+  ],
+  en: [
+    "Over 1,000 satisfied clients",
+    "More than 5 years experience",
+    "Fast 24-hour response",
+  ],
+} as const;
+
+const HOMEPAGE_TESTIMONIALS = {
+  ar: [
+    {
+      name: "فاطمة",
+      quote:
+        "خدمة متميزة، الفريق محترف والنظافة كانت فوق المتوقع. أحسنت شركة العالمية للتنظيف.",
+    },
+    {
+      name: "محمد",
+      quote:
+        "حجزت عبر واتساب وجاءوا في نفس اليوم بسرعة وبدون تأخير. أنصح بهم جداً.",
+    },
+    {
+      name: "نورة",
+      quote:
+        "تنظيف الفلل كان دقيقاً، والأسعار واضحة. تجربة ممتازة من البداية إلى النهاية.",
+    },
+  ],
+  en: [
+    {
+      name: "Fatima",
+      quote: "Excellent service, professional team and spotless results.",
+    },
+    {
+      name: "Mohammad",
+      quote: "Booked via WhatsApp and they arrived quickly with no delay.",
+    },
+    {
+      name: "Noura",
+      quote: "The villa cleaning was thorough and pricing was transparent.",
+    },
+  ],
+} as const;
+
 export default function HomePage() {
   const { t, locale } = useLanguage();
-  const wa = locale === "ar" ? WHATSAPP_HREF_AR : WHATSAPP_HREF_EN;
   const canonical = absoluteAppUrl();
   const ogImage = absoluteAppUrl("og-image.webp");
+
+  const heroHeadline = locale === "ar" ? "شركة تنظيف بمكة" : t("hero.headline");
+  const heroSubheadline =
+    locale === "ar"
+      ? "أفضل خدمات تنظيف المنازل والفلل والخزانات بأسعار مناسبة"
+      : t("hero.tagline");
+  const pageTitle =
+    locale === "ar"
+      ? "شركة تنظيف بمكة | تنظيف منازل وخزانات - العالمية"
+      : t("pageTitle");
+  const pageDescription =
+    locale === "ar"
+      ? "أفضل شركة تنظيف في مكة، تنظيف منازل وفلل وخزانات ومجالس بأفضل الأسعار. اتصل الآن."
+      : t("seo.metaDescription");
+  const trustFacts = HOMEPAGE_TRUST_FACTS[locale];
+  const testimonials = HOMEPAGE_TESTIMONIALS[locale];
 
   return (
     <>
       <Helmet>
-        <title>{t("pageTitle")}</title>
-        <meta name="description" content={t("seo.metaDescription")} />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
         {canonical ? <link rel="canonical" href={canonical} /> : null}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={t("pageTitle")} />
-        <meta property="og:description" content={t("seo.metaDescription")} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
         {canonical ? <meta property="og:url" content={canonical} /> : null}
         <meta property="og:locale" content={t("seo.ogLocale")} />
         {ogImage ? <meta property="og:image" content={ogImage} /> : null}
@@ -97,8 +154,8 @@ export default function HomePage() {
           <meta property="og:image:alt" content={t("seo.ogImageAlt")} />
         ) : null}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={t("pageTitle")} />
-        <meta name="twitter:description" content={t("seo.metaDescription")} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
         {ogImage ? <meta name="twitter:image" content={ogImage} /> : null}
         <meta
           name="robots"
@@ -155,11 +212,11 @@ export default function HomePage() {
                     id="hero-heading"
                     className="text-balance text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-[2.125rem] md:leading-tight lg:text-4xl xl:text-5xl"
                   >
-                    {t("hero.headline")}
+                    {heroHeadline}
                   </h1>
 
-                  <p className="text-base font-bold text-sky-600 md:text-lg">
-                    {t("hero.subheadBrand")}
+                  <p className="text-base font-semibold text-slate-900 md:text-lg">
+                    {heroSubheadline}
                   </p>
 
                   <p className="mx-auto max-w-xl text-sm leading-relaxed text-gray-600 md:text-base lg:mx-0">
@@ -179,31 +236,6 @@ export default function HomePage() {
                       </li>
                     ))}
                   </ul>
-
-                  <div className="flex flex-col gap-2 pt-1 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-3 lg:justify-start">
-                    <a
-                      className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-linear-to-br from-emerald-500 to-teal-600 px-5 text-sm font-bold text-white shadow-md shadow-emerald-500/20 transition hover:shadow-lg hover:shadow-emerald-500/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 sm:min-h-11 sm:w-auto sm:px-6 sm:text-sm md:text-base"
-                      href={wa}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={t("contact.ariaBookWhatsapp")}
-                    >
-                      {t("hero.ctaBook")}
-                    </a>
-                    <a
-                      className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-sky-200 bg-white px-5 text-sm font-bold text-sky-700 shadow-sm transition hover:border-sky-300 hover:bg-sky-50/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 sm:min-h-11 sm:w-auto sm:px-6 sm:text-sm md:text-base"
-                      href={PHONE_TEL_HREF}
-                      aria-label={t("contact.ariaPhone")}
-                    >
-                      {t("hero.ctaCall")}
-                    </a>
-                    <Link
-                      className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-gray-300 bg-transparent px-5 text-sm font-bold text-gray-800 transition hover:bg-gray-50/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 sm:min-h-11 sm:w-auto sm:px-6 sm:text-sm md:text-base"
-                      to="/contact"
-                    >
-                      {t("hero.ctaContact")}
-                    </Link>
-                  </div>
                 </div>
 
                 <div className="flex min-h-0 flex-col rounded-2xl border border-gray-200/70 bg-gray-50/40 p-4 md:p-5">
@@ -249,6 +281,60 @@ export default function HomePage() {
                   </ul>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="section scroll-mt-20"
+          aria-labelledby="trust-heading"
+        >
+          <div className="container">
+            <header className="section__intro">
+              <h2 id="trust-heading" className="section__title">
+                {locale === "ar" ? "ثق بنا في مكة" : "Trusted by customers"}
+              </h2>
+            </header>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {trustFacts.map((fact) => (
+                <div
+                  key={fact}
+                  className="rounded-xl bg-white p-5 text-center shadow-sm transition hover:shadow-md"
+                >
+                  <p className="text-lg font-semibold text-gray-900">{fact}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="section section--alt scroll-mt-20"
+          aria-labelledby="testimonials-heading"
+        >
+          <div className="container">
+            <header className="section__intro">
+              <h2 id="testimonials-heading" className="section__title">
+                {locale === "ar" ? "آراء العملاء" : "Testimonials"}
+              </h2>
+              <p className="section__lead">
+                {locale === "ar"
+                  ? "تجارب قصيرة من عملائنا في مكة."
+                  : "Short customer reviews from our clients."}
+              </p>
+            </header>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {testimonials.map(({ name, quote }) => (
+                <article
+                  key={name}
+                  className="rounded-xl bg-white p-5 shadow-sm transition hover:shadow-md"
+                >
+                  <p className="text-sm leading-relaxed text-gray-600">
+                    {quote}
+                  </p>
+                  <p className="mt-4 font-semibold text-gray-900">{name}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
