@@ -17,6 +17,7 @@ function buildGraph(
 ) {
   const m = messages[locale]
   const phone = `+${COMPANY_PHONE_DIGITS}`
+  const keywords = ['cleaning', 'home cleaning', 'villa cleaning']
 
   return {
     '@context': 'https://schema.org',
@@ -24,8 +25,8 @@ function buildGraph(
       {
         '@type': 'LocalBusiness',
         '@id': `${homeUrl}#business`,
-        name: m.nav.brandName,
-        alternateName: locale === 'ar' ? 'Al-Alamiya Cleaning' : 'شركة العالمية للتنظيف',
+        name: 'شركة العالمية للتنظيف',
+        alternateName: 'Al-Alamiya Cleaning',
         description: businessDescription,
         url: homeUrl,
         telephone: phone,
@@ -33,6 +34,7 @@ function buildGraph(
         image: businessImageUrl || absoluteAppUrl('favicon.svg'),
         priceRange: '$$',
         inLanguage: locale,
+        keywords,
         geo: {
           '@type': 'GeoCoordinates',
           latitude: 21.3891,
@@ -45,6 +47,7 @@ function buildGraph(
           addressCountry: 'SA',
         },
         areaServed: [
+          { '@type': 'City', name: 'Makkah' },
           { '@type': 'City', name: locale === 'ar' ? 'مكة المكرمة' : 'Mecca' },
           {
             '@type': 'Place',
@@ -74,8 +77,7 @@ function buildGraph(
           },
         ],
         knowsAbout,
-        serviceType:
-          locale === 'ar' ? 'تنظيف منازل ومكاتب وفلل' : 'Residential and commercial cleaning',
+        serviceType: 'Cleaning Services',
       },
       {
         '@type': 'WebSite',
