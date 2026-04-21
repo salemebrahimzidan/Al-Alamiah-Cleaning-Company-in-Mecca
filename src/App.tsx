@@ -5,6 +5,7 @@ import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import FaqPage from './pages/FaqPage'
 import HomePage from './pages/HomePage'
+import NotFoundPage from './pages/NotFoundPage'
 import ServicesPage from './pages/ServicesPage'
 import WhyUsPage from './pages/WhyUsPage'
 import { useLanguage } from './context/useLanguage'
@@ -48,6 +49,7 @@ export default function App() {
             </Suspense>
           }
         />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   )

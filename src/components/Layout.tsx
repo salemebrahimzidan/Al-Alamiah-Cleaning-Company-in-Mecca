@@ -2,6 +2,7 @@ import { useLayoutEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import SiteFooter from "./SiteFooter";
+import GoogleAnalytics from "./GoogleAnalytics";
 import {
   PHONE_TEL_HREF,
   WHATSAPP_HREF_AR,
@@ -21,6 +22,7 @@ export default function Layout() {
 
   return (
     <>
+      <GoogleAnalytics />
       <Navbar />
       <Outlet />
       <SiteFooter />
