@@ -7,7 +7,7 @@ import {
   SERVICE_CARD_SUMMARIES,
 } from "../constants/serviceSummaries";
 import { serviceLink } from "../constants/serviceRoutes";
-import { absoluteAppUrl } from "../constants/site";
+import { absoluteAppUrl, getSiteOrigin } from "../constants/site";
 import { useLanguage } from "../context/useLanguage";
 import "../App.css";
 
@@ -114,7 +114,7 @@ const HOMEPAGE_TESTIMONIALS = {
 
 export default function HomePage() {
   const { t, locale } = useLanguage();
-  const canonical = absoluteAppUrl();
+  const canonical = getSiteOrigin();
   const ogImage = absoluteAppUrl("og-image.webp");
 
   const heroHeadline = locale === "ar" ? "شركة تنظيف بمكة" : t("hero.headline");
@@ -124,11 +124,11 @@ export default function HomePage() {
       : t("hero.tagline");
   const pageTitle =
     locale === "ar"
-      ? "شركة تنظيف بمكة | تنظيف منازل وخزانات - العالمية"
+      ? "شركة تنظيف بمكة | تنظيف منازل وفلل وخزانات - العالمية"
       : t("pageTitle");
   const pageDescription =
     locale === "ar"
-      ? "أفضل شركة تنظيف في مكة، تنظيف منازل وفلل وخزانات ومجالس بأفضل الأسعار. اتصل الآن."
+      ? "شركة تنظيف بمكة تقدم خدمات تنظيف منازل وفلل وشقق وخزانات ومجالس بأفضل الأسعار. فريق متخصص وسرعة في التنفيذ داخل مكة."
       : t("seo.metaDescription");
   const trustFacts = HOMEPAGE_TRUST_FACTS[locale];
   const testimonials = HOMEPAGE_TESTIMONIALS[locale];
@@ -284,6 +284,61 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {locale === "ar" ? (
+          <section
+            className="section scroll-mt-20"
+            aria-labelledby="makkah-seo-heading"
+          >
+            <div className="container">
+              <header className="section__intro">
+                <h2 id="makkah-seo-heading" className="section__title">
+                  شركة تنظيف بمكة لخدمات منزلية شاملة
+                </h2>
+                <p className="section__lead">
+                  إذا كنت تبحث عن <strong>شركة تنظيف بمكة</strong> تقدم نتائج
+                  واضحة وسريعة، فنحن نغطي احتياجات المنازل والشقق والفلل داخل مكة
+                  المكرمة مع تنظيم للعمل وجودة متابعة.
+                </p>
+              </header>
+
+              <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-3">
+                <article className="rounded-2xl bg-white p-5 shadow-sm">
+                  <h2 className="text-lg font-extrabold text-gray-900">
+                    تنظيف منازل بمكة
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                    نقدم <strong>تنظيف منازل مكة</strong> للغرف والمطابخ والحمامات
+                    وإزالة الغبار وترتيب التفاصيل الأساسية حسب الاتفاق—مناسب
+                    للزيارات الدورية أو قبل المناسبات.
+                  </p>
+                </article>
+
+                <article className="rounded-2xl bg-white p-5 shadow-sm">
+                  <h2 className="text-lg font-extrabold text-gray-900">
+                    تنظيف فلل بمكة
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                    خدمة <strong>تنظيف فلل مكة</strong> تشمل تقسيم العمل على
+                    الطوابق والمداخل والمجالس مع تركيز على الجودة في الأماكن
+                    الأكثر استخداماً.
+                  </p>
+                </article>
+
+                <article className="rounded-2xl bg-white p-5 shadow-sm">
+                  <h2 className="text-lg font-extrabold text-gray-900">
+                    تنظيف خزانات بمكة
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                    نهتم بـ <strong>تنظيف خزانات بمكة</strong> بما يناسب نوع
+                    الخزان وحالته، مع تنفيذ سريع وتنظيم يضمن تقليل الإزعاج داخل
+                    المنزل.
+                  </p>
+                </article>
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         <section
           className="section scroll-mt-20"
