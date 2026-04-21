@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { IconPest, IconSteam, IconZap } from "../components/HomeIcons";
+import HomepageFaqJsonLd from "../components/HomepageFaqJsonLd";
 import SeoJsonLd from "../components/SeoJsonLd";
 import {
   HOMEPAGE_FEATURED_SERVICE_SLUGS,
@@ -112,6 +113,25 @@ const HOMEPAGE_TESTIMONIALS = {
   ],
 } as const;
 
+const HOMEPAGE_FAQ_AR = [
+  {
+    q: "كم تكلفة خدمات التنظيف في مكة؟",
+    a: "السعر يعتمد على نوع الخدمة والمساحة وحالة المكان. أرسل تفاصيلك على واتساب لتحصل على عرض واضح وسريع.",
+  },
+  {
+    q: "كيف أحجز موعد تنظيف؟",
+    a: "الحجز سهل عبر واتساب أو الاتصال. نؤكد الموعد ونحدد التفاصيل قبل وصول الفريق.",
+  },
+  {
+    q: "كم يستغرق التنظيف عادة؟",
+    a: "المدة تختلف حسب حجم العمل، وغالبًا تتراوح من ساعتين إلى عدة ساعات. نخبرك بالوقت المتوقع قبل البدء.",
+  },
+  {
+    q: "هل تغطون جميع أحياء مكة؟",
+    a: "نعم، نخدم جميع أحياء مكة حسب توفر المواعيد، مع إمكانية الاستجابة السريعة داخل المدينة.",
+  },
+] as const;
+
 export default function HomePage() {
   const { t, locale } = useLanguage();
   const canonical = getSiteOrigin();
@@ -128,7 +148,7 @@ export default function HomePage() {
       : t("pageTitle");
   const pageDescription =
     locale === "ar"
-      ? "شركة تنظيف بمكة تقدم خدمات تنظيف منازل وفلل وشقق وخزانات ومجالس بأفضل الأسعار. فريق متخصص وسرعة في التنفيذ داخل مكة."
+      ? "شركة تنظيف بمكة تقدم خدمات تنظيف منازل وفلل وشقق وخزانات ومجالس بأسعار مميزة. فريق محترف، سرعة في التنفيذ، وخدمة متاحة 24 ساعة داخل جميع أحياء مكة."
       : t("seo.metaDescription");
   const trustFacts = HOMEPAGE_TRUST_FACTS[locale];
   const testimonials = HOMEPAGE_TESTIMONIALS[locale];
@@ -168,6 +188,7 @@ export default function HomePage() {
         ) : null}
       </Helmet>
       <SeoJsonLd />
+      {locale === "ar" ? <HomepageFaqJsonLd items={[...HOMEPAGE_FAQ_AR]} /> : null}
 
       <main className="site-main">
         <section
@@ -312,6 +333,11 @@ export default function HomePage() {
                     وإزالة الغبار وترتيب التفاصيل الأساسية حسب الاتفاق—مناسب
                     للزيارات الدورية أو قبل المناسبات.
                   </p>
+                  <ul className="mt-3 list-disc space-y-1 ps-5 text-sm text-gray-700">
+                    <li>تنظيف أرضيات، أسطح، ومناطق الاستخدام اليومي.</li>
+                    <li>تنظيم العمل حسب الأولويات (مطبخ/حمامات/غرف).</li>
+                    <li>التزام بالمواعيد وسرعة إنجاز بدون إزعاج.</li>
+                  </ul>
                 </article>
 
                 <article className="rounded-2xl bg-white p-5 shadow-sm">
@@ -323,6 +349,11 @@ export default function HomePage() {
                     الطوابق والمداخل والمجالس مع تركيز على الجودة في الأماكن
                     الأكثر استخداماً.
                   </p>
+                  <ul className="mt-3 list-disc space-y-1 ps-5 text-sm text-gray-700">
+                    <li>تقسيم واضح للمهام بين الطوابق والغرف.</li>
+                    <li>عناية بالمجالس والمداخل والواجهات الداخلية.</li>
+                    <li>متابعة للتفاصيل لضمان نتيجة نظيفة ومتناسقة.</li>
+                  </ul>
                 </article>
 
                 <article className="rounded-2xl bg-white p-5 shadow-sm">
@@ -334,6 +365,11 @@ export default function HomePage() {
                     الخزان وحالته، مع تنفيذ سريع وتنظيم يضمن تقليل الإزعاج داخل
                     المنزل.
                   </p>
+                  <ul className="mt-3 list-disc space-y-1 ps-5 text-sm text-gray-700">
+                    <li>تنفيذ مناسب لنوع الخزان وحالته.</li>
+                    <li>تنظيم الدخول والخروج لتقليل الإزعاج.</li>
+                    <li>إمكانية تحديد موعد قريب حسب توفر الفريق.</li>
+                  </ul>
                 </article>
               </div>
             </div>
@@ -464,6 +500,42 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {locale === "ar" ? (
+          <section className="section scroll-mt-20" aria-labelledby="home-faq-heading">
+            <div className="container">
+              <header className="section__intro">
+                <h2 id="home-faq-heading" className="section__title">
+                  أسئلة شائعة عن خدمات التنظيف في مكة
+                </h2>
+                <p className="section__lead">
+                  إجابات سريعة تساعدك قبل الحجز.
+                </p>
+              </header>
+
+              <div className="mx-auto max-w-3xl space-y-3">
+                {HOMEPAGE_FAQ_AR.map((item) => (
+                  <details
+                    key={item.q}
+                    className="group rounded-2xl border border-gray-200/80 bg-white p-4 shadow-sm"
+                  >
+                    <summary className="cursor-pointer list-none text-sm font-bold text-gray-900">
+                      <span className="inline-flex items-center gap-2">
+                        <span className="text-sky-600" aria-hidden>
+                          ؟
+                        </span>
+                        {item.q}
+                      </span>
+                    </summary>
+                    <p className="mt-3 text-sm leading-relaxed text-gray-600">
+                      {item.a}
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
       </main>
     </>
   );
