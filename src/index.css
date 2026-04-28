@@ -1,5 +1,32 @@
 @import 'tailwindcss';
 
+@theme {
+  --animate-accordion-down: accordion-down 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-accordion-up: accordion-up 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+    opacity: 0.94;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-collapsible-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0.94;
+  }
+}
+
 /* Professional cleaning — light, clean, trustworthy */
 :root {
   --primary: #0ea5e9;
@@ -12,7 +39,8 @@
   --border: #e5e7eb;
   --text-strong: #111827;
   --text: #6b7280;
-  --muted: #9ca3af;
+  /* Darker than default gray-400 for WCAG contrast on white */
+  --muted: #6d7280;
   --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.05);
   --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.08);
@@ -23,6 +51,7 @@
   --accent-border: color-mix(in oklab, var(--primary) 35%, var(--border));
   --social-bg: #f9fafb;
 
+  /* System stack only — no downloadable webfonts, so no FOUT/FOIT (equivalent to local fonts with immediate paint). */
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     'Noto Sans', 'Liberation Sans', sans-serif;
   --heading: var(--sans);
@@ -62,24 +91,29 @@ html[dir='rtl'] h2 {
   }
 }
 
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 ::selection {
   background: color-mix(in oklab, var(--primary) 22%, transparent);
 }
 
 .topbar-frosted {
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+  background: #ffffff;
+  border-bottom: 1px solid #e8ecf0;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
 }
 
 #root {
-  width: min(1120px, 100%);
+  width: 100%;
   max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid #f3f4f6;
+  margin: 0;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
