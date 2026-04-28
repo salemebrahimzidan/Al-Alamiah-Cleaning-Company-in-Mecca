@@ -38,17 +38,30 @@
     "labelArabic": "العربية"
   },
   "hero": {
-    "kicker": "Mecca (Makkah) · Local cleaning team",
+    "kicker": "MECCA (MAKKAH) — LOCAL CLEANING TEAM",
     "headline": "Cleaning company in Mecca — residential & commercial services",
     "subheadBrand": "Al-Alamiya Cleaning",
+    "bodyLead": "Homes, apartments & villas in Makkah, AC cleaning, sofa & carpet care, deep cleaning & offices—steam where suitable, plus pest control.",
+    "bodyDetail": "Quick replies on WhatsApp or phone.",
     "tagline": "Homes, apartments & villas in Makkah, AC cleaning, sofa & carpet care, deep cleaning & offices—steam where suitable, plus pest control. Quick replies on WhatsApp or phone.",
     "highlightSteam": "Steam cleaning",
     "highlightPest": "Pest control",
     "highlightFast": "Fast & reliable",
     "ctaBook": "WhatsApp — book now",
+    "ctaChatWhatsapp": "Chat on WhatsApp",
     "ctaCall": "Call now",
     "ctaContact": "Contact us",
-    "mosaicHeading": "Trust & highlights"
+    "mosaicHeading": "Our Trust & Highlights"
+  },
+  "serviceStats": {
+    "homes": "Homes",
+    "offices": "Offices",
+    "deepCleaning": "Deep cleaning",
+    "pestControl": "Pest control",
+    "ratingLabel": "Rating",
+    "ratingValue": "4.9 / 5",
+    "happyCustomers": "Happy customers",
+    "happyCustomersValue": "1,000+"
   },
   "common": {
     "learnMore": "Learn more",

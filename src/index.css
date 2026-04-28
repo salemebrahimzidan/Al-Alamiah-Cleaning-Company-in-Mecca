@@ -1,5 +1,32 @@
 @import 'tailwindcss';
 
+@theme {
+  --animate-accordion-down: accordion-down 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-accordion-up: accordion-up 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+    opacity: 0.94;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-collapsible-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0.94;
+  }
+}
+
 /* Professional cleaning — light, clean, trustworthy */
 :root {
   --primary: #0ea5e9;
@@ -78,11 +105,9 @@ html[dir='rtl'] h2 {
 }
 
 .topbar-frosted {
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+  background: #ffffff;
+  border-bottom: 1px solid #e8ecf0;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
 }
 
 #root {

@@ -1,11 +1,11 @@
-/* Layout */
+/* Layout — offset for floating navbar */
 .site-main {
-  padding-top: 4.75rem;
+  padding-top: 6rem;
 }
 
 @media (min-width: 768px) {
   .site-main {
-    padding-top: 5rem;
+    padding-top: 6.75rem;
   }
 }
 
@@ -534,83 +534,6 @@
   outline: 2px solid color-mix(in oklab, var(--primary) 55%, transparent);
   outline-offset: 2px;
   border-radius: 4px;
-}
-
-.faq-list {
-  max-width: none;
-  width: 100%;
-  margin-inline: 0;
-  text-align: start;
-}
-
-@media (min-width: 1024px) {
-  .faq-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 1.25rem;
-    align-items: start;
-  }
-
-  .faq-list .faq-item {
-    margin-bottom: 0.65rem;
-  }
-}
-
-.faq-item {
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: var(--surface);
-  margin-bottom: 0.65rem;
-  padding: 0.25rem 1rem;
-  box-shadow: var(--shadow-soft);
-}
-
-.faq-item__q {
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--text-strong);
-  padding-block: 0.85rem;
-  list-style: none;
-  position: relative;
-  padding-inline-end: 1.75rem;
-}
-
-.faq-item__q:focus-visible {
-  outline: 2px solid color-mix(in oklab, var(--primary) 55%, transparent);
-  outline-offset: 2px;
-  border-radius: 10px;
-}
-
-.faq-item__q::-webkit-details-marker {
-  display: none;
-}
-
-.faq-item__q::after {
-  content: "+";
-  position: absolute;
-  inset-inline-end: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-weight: 800;
-  color: var(--primary);
-}
-
-.faq-item[open] .faq-item__q::after {
-  content: "−";
-}
-
-.faq-item__a {
-  margin: 0 0 1rem;
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: var(--text);
-}
-
-.faq-cta {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
 }
 
 .site-footer__services-title {

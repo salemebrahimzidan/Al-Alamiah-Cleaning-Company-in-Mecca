@@ -1,11 +1,8 @@
 import { lazy, Suspense } from 'react'
 import { Helmet } from 'react-helmet-async'
-import {
-  IconLocation,
-  IconMail,
-  IconPhone,
-  IconWhatsApp,
-} from '../components/ContactIcons'
+import { Mail, MapPin, Phone } from 'lucide-react'
+import { FaWhatsapp } from 'react-icons/fa'
+
 import {
   COMPANY_EMAIL,
   COMPANY_PHONE_DIGITS,
@@ -57,7 +54,7 @@ export default function ContactPage() {
                       className="contact-card__icon-wrap contact-card__icon-wrap--phone"
                       aria-hidden
                     >
-                      <IconPhone className="contact-card__icon-svg" />
+                      <Phone className="contact-card__icon-svg" strokeWidth={2.25} />
                     </span>
                     <span className="contact-card__body">
                       <span className="contact-card__label">{t('contact.phoneCard')}</span>
@@ -77,7 +74,7 @@ export default function ContactPage() {
                       className="contact-card__icon-wrap contact-card__icon-wrap--mail"
                       aria-hidden
                     >
-                      <IconMail className="contact-card__icon-svg" />
+                      <Mail className="contact-card__icon-svg" strokeWidth={2.25} />
                     </span>
                     <span className="contact-card__body">
                       <span className="contact-card__label">{t('contact.emailCard')}</span>
@@ -99,7 +96,7 @@ export default function ContactPage() {
                       className="contact-card__icon-wrap contact-card__icon-wrap--wa"
                       aria-hidden
                     >
-                      <IconWhatsApp className="contact-card__icon-svg" />
+                      <FaWhatsapp className="contact-card__icon-svg" aria-hidden />
                     </span>
                     <span className="contact-card__body">
                       <span className="contact-card__label">{t('contact.whatsappCard')}</span>
@@ -113,7 +110,7 @@ export default function ContactPage() {
                       className="contact-card__icon-wrap contact-card__icon-wrap--loc"
                       aria-hidden
                     >
-                      <IconLocation className="contact-card__icon-svg" />
+                      <MapPin className="contact-card__icon-svg" strokeWidth={2.25} />
                     </span>
                     <span className="contact-card__body">
                       <span className="contact-card__label">{t('contact.addressTitle')}</span>
