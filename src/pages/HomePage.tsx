@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { IconPest, IconSteam, IconZap } from "../components/HomeIcons";
+import HeroSection from "../components/HeroSection";
 import HomepageFaqJsonLd from "../components/HomepageFaqJsonLd";
 import SeoJsonLd from "../components/SeoJsonLd";
 import {
@@ -9,31 +9,11 @@ import {
 } from "../constants/serviceSummaries";
 import { serviceLink } from "../constants/serviceRoutes";
 import { absoluteAppUrl, getSiteOrigin } from "../constants/site";
+import ServiceStatsBar from "../components/ServiceStatsBar";
+import FaqAccordion, { FaqSectionBadge } from "../components/FaqAccordion";
+import TrustHighlights from "../components/TrustHighlights";
 import { useLanguage } from "../context/useLanguage";
 import "../App.css";
-
-const TRUST_STAT_KEYS = ["a", "b", "c", "d"] as const;
-
-const HERO_HIGHLIGHTS = [
-  {
-    key: "steam" as const,
-    msgKey: "hero.highlightSteam" as const,
-    Icon: IconSteam,
-    iconWrap: "border-sky-200 bg-sky-50 text-sky-600",
-  },
-  {
-    key: "pest" as const,
-    msgKey: "hero.highlightPest" as const,
-    Icon: IconPest,
-    iconWrap: "border-emerald-200 bg-emerald-50 text-emerald-600",
-  },
-  {
-    key: "fast" as const,
-    msgKey: "hero.highlightFast" as const,
-    Icon: IconZap,
-    iconWrap: "border-amber-200 bg-amber-50 text-amber-600",
-  },
-] as const;
 
 const HOMEPAGE_FEATURED_SERVICES = HOMEPAGE_FEATURED_SERVICE_SLUGS.map(
   (slug) => {
@@ -137,11 +117,6 @@ export default function HomePage() {
   const canonical = getSiteOrigin();
   const ogImage = absoluteAppUrl("og-image.webp");
 
-  const heroHeadline = locale === "ar" ? "شركة تنظيف بمكة" : t("hero.headline");
-  const heroSubheadline =
-    locale === "ar"
-      ? "أفضل خدمات تنظيف المنازل والفلل والخزانات بأسعار مناسبة"
-      : t("hero.tagline");
   const pageTitle =
     locale === "ar"
       ? "شركة تنظيف بمكة | تنظيف منازل وفلل وخزانات - العالمية"
@@ -193,115 +168,37 @@ export default function HomePage() {
       <main className="site-main">
         <section
           id="home"
-          className="relative scroll-mt-20 overflow-hidden bg-linear-to-b from-sky-50/70 via-white to-gray-50/40"
+          className="relative scroll-mt-28 overflow-hidden bg-linear-to-b from-[#eef8ff] via-[#fafdff] to-[#f5f9fc] pb-16 pt-8 md:scroll-mt-32 md:pb-24 md:pt-10"
           aria-labelledby="hero-heading"
         >
           <div
-            className="pointer-events-none absolute -inset-s-24 -top-24 size-[min(26rem,88vw)] rounded-full bg-sky-200/35 blur-3xl"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_95%_60%_at_72%_-18%,rgb(186_230_253/0.5),transparent)]"
             aria-hidden
           />
+
           <div
-            className="pointer-events-none absolute -inset-e-16 top-1/4 size-[min(20rem,65vw)] rounded-full bg-emerald-200/30 blur-3xl"
+            className="pointer-events-none absolute inset-y-10 right-0 hidden w-[48%] lg:block"
             aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-[42%] bg-[radial-gradient(ellipse_80%_55%_at_50%_-18%,rgb(14_165_233/0.12),transparent)]"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-sky-200/50 to-transparent"
-            aria-hidden
-          />
+          >
+            <div
+              className="absolute inset-y-4 rounded-4xl bg-cover bg-center opacity-[0.16]"
+              style={{
+                backgroundImage:
+                  "url(https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=75)",
+                filter: "blur(4px)",
+              }}
+            />
+            <div className="absolute inset-0 rounded-4xl bg-linear-to-l from-white via-white/88 to-transparent" />
+          </div>
 
-          <div className="relative z-10 mx-auto w-full max-w-336 px-4 py-6 md:px-6 md:py-8 lg:px-10 lg:py-9 xl:px-16">
-            <div className="relative overflow-hidden rounded-3xl border border-gray-200/80 bg-white/75 p-5 shadow-sm shadow-gray-200/40 ring-1 ring-gray-100/80 backdrop-blur-md md:p-6 lg:p-8">
-              <div
-                className="pointer-events-none absolute inset-0 opacity-[0.35]"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2394a3b8' fill-opacity='0.09'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                }}
-                aria-hidden
-              />
+          <div className="relative z-10 mx-auto min-w-0 w-full max-w-[1360px] px-4 md:px-6 lg:px-10 xl:px-14">
+            <div className="grid items-stretch gap-10 lg:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)] lg:gap-12 xl:gap-17">
+              <HeroSection />
+              <TrustHighlights />
+            </div>
 
-              <div className="relative grid items-start gap-6 sm:gap-7 lg:grid-cols-2 lg:gap-8 xl:gap-10">
-                <div className="space-y-4 text-center lg:text-start">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-sky-600">
-                    {t("hero.kicker")}
-                  </p>
-
-                  <h1
-                    id="hero-heading"
-                    className="text-balance text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-[2.125rem] md:leading-tight lg:text-4xl xl:text-5xl"
-                  >
-                    {heroHeadline}
-                  </h1>
-
-                  <p className="text-base font-semibold text-slate-900 md:text-lg">
-                    {heroSubheadline}
-                  </p>
-
-                  <p className="mx-auto max-w-xl text-sm leading-relaxed text-gray-600 md:text-base lg:mx-0">
-                    {t("hero.tagline")}
-                  </p>
-
-                  <ul
-                    className="flex flex-wrap justify-center gap-2 lg:justify-start"
-                    aria-label={t("trustStrip.ariaListLabel")}
-                  >
-                    {TRUST_STAT_KEYS.map((k) => (
-                      <li
-                        key={k}
-                        className="rounded-full border border-gray-200/90 bg-gray-50/90 px-3 py-1 text-xs font-semibold text-gray-800"
-                      >
-                        {t(`trustStrip.${k}`)}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="flex min-h-0 flex-col rounded-2xl border border-gray-200/70 bg-gray-50/40 p-4 md:p-5">
-                  <h2
-                    id="hero-mosaic-heading"
-                    className="mb-3 text-center text-xs font-bold uppercase tracking-[0.12em] text-gray-500 lg:mb-4 lg:text-start"
-                  >
-                    {t("hero.mosaicHeading")}
-                  </h2>
-                  <ul
-                    className="m-0 grid flex-1 list-none auto-rows-fr grid-cols-2 gap-4 p-0 lg:grid-cols-3"
-                    aria-labelledby="hero-mosaic-heading"
-                  >
-                    {TRUST_STAT_KEYS.map((k) => (
-                      <li
-                        key={k}
-                        className="flex min-h-24 flex-col items-center justify-center gap-1 rounded-xl border border-gray-200/90 bg-white p-3 text-center shadow-sm"
-                      >
-                        <strong className="text-sm font-bold leading-snug text-gray-900">
-                          {t(`trustStats.${k}Label`)}
-                        </strong>
-                        <span className="text-xs font-medium leading-snug text-gray-500">
-                          {t(`trustStats.${k}Hint`)}
-                        </span>
-                      </li>
-                    ))}
-                    {HERO_HIGHLIGHTS.map(({ key, msgKey, Icon, iconWrap }) => (
-                      <li
-                        key={key}
-                        className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-xl border border-gray-200/90 bg-white p-3 text-center shadow-sm"
-                      >
-                        <span
-                          className={`flex size-9 shrink-0 items-center justify-center rounded-full border md:size-10 ${iconWrap}`}
-                          aria-hidden
-                        >
-                          <Icon className="size-4.5 md:size-5" />
-                        </span>
-                        <span className="text-xs font-semibold leading-snug text-gray-900 md:text-sm">
-                          {t(msgKey)}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+            <div className="mt-10 min-w-0 px-0 md:mt-14">
+              <ServiceStatsBar />
             </div>
           </div>
         </section>
@@ -502,39 +399,16 @@ export default function HomePage() {
         </section>
 
         {locale === "ar" ? (
-          <section className="section scroll-mt-20" aria-labelledby="home-faq-heading">
-            <div className="container">
-              <header className="section__intro">
-                <h2 id="home-faq-heading" className="section__title">
-                  أسئلة شائعة عن خدمات التنظيف في مكة
-                </h2>
-                <p className="section__lead">
-                  إجابات سريعة تساعدك قبل الحجز.
-                </p>
-              </header>
-
-              <div className="mx-auto max-w-3xl space-y-3">
-                {HOMEPAGE_FAQ_AR.map((item) => (
-                  <details
-                    key={item.q}
-                    className="group rounded-2xl border border-gray-200/80 bg-white p-4 shadow-sm"
-                  >
-                    <summary className="cursor-pointer list-none text-sm font-bold text-gray-900">
-                      <span className="inline-flex items-center gap-2">
-                        <span className="text-sky-600" aria-hidden>
-                          ؟
-                        </span>
-                        {item.q}
-                      </span>
-                    </summary>
-                    <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                      {item.a}
-                    </p>
-                  </details>
-                ))}
-              </div>
-            </div>
-          </section>
+          <FaqAccordion
+            headingLevel="h2"
+            headingId="home-faq-heading"
+            badge={
+              <FaqSectionBadge>{t("faq.sectionTitle")}</FaqSectionBadge>
+            }
+            title="أسئلة شائعة عن خدمات التنظيف في مكة"
+            lead="إجابات سريعة تساعدك قبل الحجز."
+            items={HOMEPAGE_FAQ_AR}
+          />
         ) : null}
       </main>
     </>

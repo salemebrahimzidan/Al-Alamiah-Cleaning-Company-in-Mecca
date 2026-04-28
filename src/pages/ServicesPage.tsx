@@ -1,14 +1,17 @@
-import type { ComponentType } from "react";
+import {
+  type LucideIcon,
+  AirVent,
+  Briefcase,
+  Bug,
+  Building2,
+  Home,
+  Sparkles,
+  SprayCan,
+  Users,
+} from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import {
-  IconClock,
-  IconPest,
-  IconSparkle,
-  IconSteam,
-  IconTeam,
-  IconZap,
-} from "../components/HomeIcons";
+
 import { SERVICE_CARD_SUMMARIES } from "../constants/serviceSummaries";
 import { LOCATION_LINKS, serviceLink } from "../constants/serviceRoutes";
 import type { ServiceSeoSlug } from "../data/seoLandings";
@@ -16,19 +19,23 @@ import { absoluteAppUrl } from "../constants/site";
 import { useLanguage } from "../context/useLanguage";
 import "../App.css";
 
-const SERVICE_ICONS: Record<
-  ServiceSeoSlug,
-  ComponentType<{ className?: string }>
-> = {
-  "home-cleaning-makkah": IconZap,
-  "apartment-cleaning-makkah": IconSparkle,
-  "villa-cleaning-makkah": IconTeam,
-  "office-cleaning-makkah": IconClock,
-  "deep-cleaning-makkah": IconSparkle,
-  "ac-cleaning-makkah": IconZap,
-  "sofa-carpet-cleaning-makkah": IconSteam,
-  "pest-control-makkah": IconPest,
+const SERVICE_ICONS: Record<ServiceSeoSlug, LucideIcon> = {
+  "home-cleaning-makkah": Home,
+  "apartment-cleaning-makkah": Building2,
+  "villa-cleaning-makkah": Users,
+  "office-cleaning-makkah": Briefcase,
+  "deep-cleaning-makkah": Sparkles,
+  "ac-cleaning-makkah": AirVent,
+  "sofa-carpet-cleaning-makkah": SprayCan,
+  "pest-control-makkah": Bug,
 };
+
+/** Premium SaaS-style accent circles (blue / green / orange rotation). */
+const ICON_WRAP = [
+  "bg-sky-50 text-sky-700 ring-sky-200/85 shadow-inner shadow-sky-100/60",
+  "bg-emerald-50 text-emerald-700 ring-emerald-200/85 shadow-inner shadow-emerald-100/60",
+  "bg-orange-50 text-orange-800 ring-orange-200/85 shadow-inner shadow-orange-100/60",
+] as const;
 
 export default function ServicesPage() {
   const { t } = useLanguage();
@@ -64,15 +71,20 @@ export default function ServicesPage() {
             </header>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {SERVICE_CARD_SUMMARIES.map(({ slug, titleKey, blurbKey }) => {
+              {SERVICE_CARD_SUMMARIES.map(({ slug, titleKey, blurbKey }, index) => {
                 const Icon = SERVICE_ICONS[slug as ServiceSeoSlug];
+                const wrap = ICON_WRAP[index % ICON_WRAP.length];
                 return (
                   <article
                     key={slug}
                     className="service-card bg-white p-4 rounded-xl shadow transition hover:shadow-md"
                   >
                     <div className="service-card__icon" aria-hidden>
-                      <Icon className="h-9 w-9" />
+                      <span
+                        className={`inline-flex size-11 shrink-0 items-center justify-center rounded-full ring-1 ${wrap}`}
+                      >
+                        <Icon className="size-[18px]" strokeWidth={2.25} aria-hidden />
+                      </span>
                     </div>
                     <h3 className="service-card__title">{t(titleKey)}</h3>
                     <p className="service-card__desc">{t(blurbKey)}</p>
